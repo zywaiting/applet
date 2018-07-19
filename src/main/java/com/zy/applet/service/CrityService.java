@@ -16,4 +16,8 @@ public interface CrityService {
      * @return
      */
     List<Crity> findCrity();
+    //查询城市简介
+    List<String> findCityInfo(String crity);
+    //查询城市主图片
+    List<String> findCityMainPicture(String crity);
 }

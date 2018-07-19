@@ -25,4 +25,14 @@ public class CrityServiceImpl implements CrityService {
     public List<Crity> findCrity() {
         return crityMapper.findCrity();
     }
+
+    @Override
+    public List<String> findCityInfo(String crity) {
+        return crityMapper.findCityInfo(crity);
+    }
+
+    @Override
+    public List<String> findCityMainPicture(String crity) {
+        return crityMapper.findCityMainPicture(crity);
+    }
 }

@@ -4,4 +4,12 @@
     <select id="findCrity" resultType="com.zy.applet.pojo.Crity">
         SELECT * FROM crity
     </select>
+
+    <select id="findCityInfo" resultType="java.lang.String">
+        SELECT `intro` FROM `crity_info` WHERE `crity_name` = #{crity} AND `intro` IS NOT NULL
+    </select>
+
+    <select id="findCityMainPicture" resultType="java.lang.String">
+        SELECT `main_picture` FROM `crity_info` WHERE `crity_name` = #{crity} AND `main_picture` IS NOT NULL
+    </select>
 </mapper>

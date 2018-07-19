@@ -20,4 +20,22 @@ public class CrityController {
     public List findOneCity() {
         return ListSplitUtils.createList(crityService.findCrity(),4);
     }
+
+    /**
+     * 查询城市简介
+     * @return
+             */
+    @RequestMapping(value = "api/crityinfo")
+    public List findCityInfo(String crity) {
+        return crityService.findCityInfo(crity);
+    }
+
+    /**
+     * 查询主图片
+     * @return
+     */
+    @RequestMapping(value = "api/critymainpicture")
+    public List findCityMainPicture(String crity) {
+        return crityService.findCityMainPicture(crity);
+    }
 }
