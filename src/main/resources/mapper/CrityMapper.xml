@@ -12,4 +12,8 @@
     <select id="findCityMainPicture" resultType="java.lang.String">
         SELECT `main_picture` FROM `crity_info` WHERE `crity_name` = #{crity} AND `main_picture` IS NOT NULL
     </select>
+    <!--查询城市生活-->
+    <select id="findCrityLife" resultType="java.lang.String">
+        SELECT `life` FROM `crity_info` WHERE `crity_name` = #{crity} AND `life` IS NOT NULL
+    </select>
 </mapper>

@@ -20,4 +20,6 @@ public interface CrityService {
     List<String> findCityInfo(String crity);
     //查询城市主图片
     List<String> findCityMainPicture(String crity);
+    //查询城市生活
+    List<String> findCrityLife(String crity);
 }

@@ -17,16 +17,16 @@ public class CrityController {
     @Autowired
     private CrityService crityService;
     @RequestMapping(value = "api/crity")
-    public List findOneCity() {
+    public List findOneCrity() {
         return ListSplitUtils.createList(crityService.findCrity(),4);
     }
 
     /**
      * 查询城市简介
      * @return
-             */
+     * */
     @RequestMapping(value = "api/crityinfo")
-    public List findCityInfo(String crity) {
+    public List findCrityInfo(String crity) {
         return crityService.findCityInfo(crity);
     }
 
@@ -35,7 +35,15 @@ public class CrityController {
      * @return
      */
     @RequestMapping(value = "api/critymainpicture")
-    public List findCityMainPicture(String crity) {
+    public List findCrityMainPicture(String crity) {
         return crityService.findCityMainPicture(crity);
+    }
+
+    /**
+     * 查询生活数据
+     */
+    @RequestMapping(value = "api/critylife")
+    public List findCrityLife(String crity){
+        return crityService.findCrityLife(crity);
     }
 }

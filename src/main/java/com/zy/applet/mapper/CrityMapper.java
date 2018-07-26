@@ -21,6 +21,8 @@ public interface CrityMapper {
     List<String> findCityInfo(@Param("crity") String crity);
     //查询城市主图片
     List<String> findCityMainPicture(@Param("crity") String crity);
+    //查询城市生活
+    List<String> findCrityLife(@Param("crity") String crity);
 
 
 }
