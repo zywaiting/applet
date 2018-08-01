@@ -19,7 +19,7 @@
         select
         <include refid="Base_Column_List" />
         from joke
-        ORDER BY RAND()  20
+        ORDER BY RAND() LIMIT 20
     </select>
 
 </mapper>
