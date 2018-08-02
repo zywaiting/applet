@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.applet.mapper.UserConfigMapper">
+
+    <!--查询是否已经存在用户信息-->
+    <select id="selectCountUserConfigByOpenId" resultType="Integer">
+        SELECT COUNT(*) FROM `user_config` WHERE `opne_id` = #{openId}
+    </select>
+    <!--插入用户信息-->
+    <select id="insterUserConfigOfOpenId" resultType="Integer">
+        INSERT INTO `user_config` (`opne_id`,`union_id`) VALUES (#{openId},#{unionId})
+    </select>
+</mapper>
