@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zy.applet.mapper.JokeMapper">
-    <resultMap id="BaseResultMap" type="com.zy.applet.pojo.Joke">
+    <!--<resultMap id="BaseResultMap" type="com.zy.applet.pojo.Joke">
         <result column="id" property="id" />
         <result column="content" property="content" />
         <result column="hash_id" property="hashId" />
         <result column="unix_time" property="unixTime" />
         <result column="update_time" property="updateTime" />
-    </resultMap>
+    </resultMap>-->
 
     <parameterMap id="Joke" type="com.zy.applet.pojo.Joke"/>
 
@@ -15,11 +15,17 @@
         id, content, hash_id, unix_time, update_time
     </sql>
 
-    <select id="findByRandom" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from joke
-        ORDER BY RAND() LIMIT 20
+    <select id="findByRandom" resultType="com.zy.applet.pojo.Joke">
+        SELECT sh1.* FROM joke AS sh1
+            JOIN
+            (SELECT
+                ROUND(
+                    RAND() * ((SELECT MAX(id) FROM joke)-(SELECT MIN(id) FROM joke))
+                    + (SELECT MIN(id) FROM joke)
+                ) AS id
+            ) AS sh2
+            WHERE sh1.id>=sh2.id
+            LIMIT 20
     </select>
 
 </mapper>
