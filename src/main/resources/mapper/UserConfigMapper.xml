@@ -3,11 +3,57 @@
 <mapper namespace="com.zy.applet.mapper.UserConfigMapper">
 
     <!--查询是否已经存在用户信息-->
-    <select id="selectCountUserConfigByOpenId" resultType="Integer">
+    <select id="selectCountUserConfigByOpenId" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM `user_config` WHERE `opne_id` = #{openId}
     </select>
     <!--插入用户信息-->
-    <select id="insterUserConfigOfOpenId" resultType="Integer">
-        INSERT INTO `user_config` (`opne_id`,`union_id`) VALUES (#{openId},#{unionId})
-    </select>
+    <insert id="insterUserConfig" parameterType="com.zy.applet.pojo.UserConfig">
+        INSERT INTO `user_config` (`opne_id`,`nick_name`,`avatar_url`,`gender`,`city`,`province`,`country`,`language`,`union_id`,
+        `latitude`,`longitude`,`speed`,`accuracy`,`vertical_accuracy`,`horizontal_accuracy`,`credit_date`,`update_date`)
+        VALUES (#{openId},#{nickName},#{avatarUrl},#{gender},#{city},#{province},#{country},#{language},#{unionId},
+        #{latitude},#{longitude},#{speed},#{accuracy},#{verticalAccuracy},#{horizontalAccuracy},NOW(),NOW())
+    </insert>
+    <!--补全用户信息-->
+    <update id="updateUserConfigByOpenId" parameterType="com.zy.applet.pojo.UserConfig">
+        UPDATE `user_config` SET
+        `update_date` = NOW()
+        <set>
+            <if test="nickName != null and nickName !=''">,`nick_name` = #{nickName}</if>
+            <if test="avatarUrl != null and avatarUrl !=''">,`avatar_url` = #{avatarUrl}</if>
+            <if test="gender != null and gender !=''">,`gender` = #{gender}</if>
+            <if test="city != null and city !=''">,`city` = #{city}</if>
+            <if test="province != null and province !=''">,`province` = #{province}</if>
+            <if test="country != null and country !=''">,`country` = #{country}</if>
+            <if test="language != null and language !=''">,`language` = #{language}</if>
+            <if test="latitude != null and latitude !=''">,`latitude` = #{latitude}</if>
+            <if test="longitude != null and longitude !=''">,`longitude` = #{longitude}</if>
+            <if test="speed != null and speed !=''">,`speed` = #{speed}</if>
+            <if test="accuracy != null and accuracy !=''">,`accuracy` = #{accuracy}</if>
+            <if test="verticalAccuracy != null and verticalAccuracy !=''">,`vertical_accuracy` = #{verticalAccuracy}</if>
+            <if test="horizontalAccuracy != null and horizontalAccuracy !=''">,`horizontal_accuracy` = #{horizontalAccuracy}</if>
+        </set>
+
+        WHERE `opne_id` = #{openId}
+    </update>
+    <!--`opne_id` varchar(40) CHARACTER SET utf8 NOT NULL COMMENT 'openId',
+  `nick_name` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户昵称',
+  `avatar_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表132*132正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。',
+  `gender` varchar(5) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户的性别，值为1时是男性，值为2时是女性，值为0时是未知',
+  `city` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户所在城市',
+  `province` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户所在省份',
+  `country` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户所在国家',
+  `language` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户的语言，简体中文为zh_CN',
+  `union_id` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户在开放平台的唯一标识符',-->
+
+
+
+    <!--
+      `latitude` varchar(15) CHARACTER SET utf8 DEFAULT NULL COMMENT '纬度，浮点数，范围为-90~90，负数表示南纬',
+  `longitude` varchar(15) CHARACTER SET utf8 DEFAULT NULL COMMENT '经度，浮点数，范围为-180~180，负数表示西经',
+  `speed` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '速度，浮点数，单位m/s',
+  `accuracy` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '位置的精确度',
+  `altitude` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '高度，单位 m',
+  `vertical_accuracy` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '垂直精度，单位 m（Android 无法获取，返回 0）',
+  `horizontal_accuracy` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '水平精度，单位 m',
+  `union_id` varchar(40) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户在开放平台的唯一标识符',-->
 </mapper>

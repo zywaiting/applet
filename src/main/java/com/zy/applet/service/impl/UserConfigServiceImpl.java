@@ -5,6 +5,7 @@ import com.zy.applet.mapper.LoginMapper;
 import com.zy.applet.mapper.UserConfigMapper;
 import com.zy.applet.pojo.AppletConfig;
 import com.zy.applet.pojo.AppletUrl;
+import com.zy.applet.pojo.UserConfig;
 import com.zy.applet.service.AppletUrlService;
 import com.zy.applet.service.LoginService;
 import com.zy.applet.service.UserConfigService;
@@ -24,7 +25,12 @@ public class UserConfigServiceImpl implements UserConfigService {
     }
 
     @Override
-    public Integer insterUserConfigOfOpenId(String openId, String unionId) {
-        return userConfigMapper.insterUserConfigOfOpenId(openId,unionId);
+    public Integer insterUserConfig(UserConfig userConfig) {
+        return userConfigMapper.insterUserConfig(userConfig);
+    }
+
+    @Override
+    public Integer updateUserConfigByOpenId(UserConfig userConfig) {
+        return userConfigMapper.updateUserConfigByOpenId(userConfig);
     }
 }
