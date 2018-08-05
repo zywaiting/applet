@@ -37,37 +37,24 @@ public class UserConfig {
     private String country;
     private String language;
     private String mobile;
-    private String latitude;
-    private String longitude;
-    private String speed;
+    private Double latitude;
+    private Double longitude;
+    private Double speed;
     private String accuracy;
     private String altitude;
     private String verticalAccuracy;
     private String horizontalAccuracy;
     private String unionId;
 
-    public String getOpenId() {
-        return openId;
+
+    private String errMsg;
+
+    public String getErrMsg() {
+        return errMsg;
     }
 
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
-    public String getUnionId() {
-        return unionId;
-    }
-
-    public void setUnionId(String unionId) {
-        this.unionId = unionId;
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
     }
 
     public Integer getId() {
@@ -76,6 +63,14 @@ public class UserConfig {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public String getUserName() {
@@ -100,6 +95,14 @@ public class UserConfig {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public String getGender() {
@@ -150,27 +153,27 @@ public class UserConfig {
         this.mobile = mobile;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public String getSpeed() {
+    public Double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(String speed) {
+    public void setSpeed(Double speed) {
         this.speed = speed;
     }
 
@@ -204,5 +207,13 @@ public class UserConfig {
 
     public void setHorizontalAccuracy(String horizontalAccuracy) {
         this.horizontalAccuracy = horizontalAccuracy;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
     }
 }

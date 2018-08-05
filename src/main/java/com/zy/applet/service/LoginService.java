@@ -1,6 +1,5 @@
 package com.zy.applet.service;
 
-import com.zy.applet.pojo.UserConfig;
 
 /**
  * 用于微信登录

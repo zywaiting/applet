@@ -15,9 +15,9 @@
     </insert>
     <!--补全用户信息-->
     <update id="updateUserConfigByOpenId" parameterType="com.zy.applet.pojo.UserConfig">
-        UPDATE `user_config` SET
-        `update_date` = NOW()
+        UPDATE `user_config`
         <set>
+            `update_date` = NOW()
             <if test="nickName != null and nickName !=''">,`nick_name` = #{nickName}</if>
             <if test="avatarUrl != null and avatarUrl !=''">,`avatar_url` = #{avatarUrl}</if>
             <if test="gender != null and gender !=''">,`gender` = #{gender}</if>

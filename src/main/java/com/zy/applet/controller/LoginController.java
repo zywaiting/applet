@@ -4,6 +4,7 @@ import com.zy.applet.pojo.UserConfig;
 import com.zy.applet.service.LoginService;
 import com.zy.applet.utils.ResponseMessageUtils;
 import com.zy.applet.utils.Utils;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    //用户登录接口
+    //用户登录接口location
     @RequestMapping("onLogin")
     public ResponseMessageUtils onLogin(String code, String express, String name, String userInfo, String location) {
         logger.info("调用了用户登录接口---------------onLogin");

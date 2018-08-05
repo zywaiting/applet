@@ -35,12 +35,10 @@ public class LoginServiceImpl implements LoginService {
         LoginHttpUtils.Result result = LoginHttpUtils.loginHttpUtils(code, appletConfig.getAppId(), appletConfig.getAppSecret(), appletUrl.getUrl());
         if (result != null && !StringUtils.isEmpty(result.getOpenid())) {
             UserConfig userConfig = new UserConfig();
-            if (userInfo != null && StringUtils.isNoneBlank(userInfo)) {
-                logger.info("userInfo:{}", location);
+            if (StringUtils.isNotBlank(userInfo) && userInfo.length() > 0 && !"undefined".equals(userInfo) && !"null".equals(location)) {
                 userConfig = Utils.json(userInfo, UserConfig.class);
             }
-            if (location == "null" && StringUtils.isNoneBlank(location)) {
-                logger.info("location:{}", location);
+            if (StringUtils.isNotBlank(location) && location.length() > 0 && !"null".equals(location) && !"undefined".equals(location)) {
                 userConfig = Utils.json(location, UserConfig.class);
             }
             userConfig.setOpenId(result.getOpenid());
@@ -67,5 +65,4 @@ public class LoginServiceImpl implements LoginService {
      * verticalAccuracy	垂直精度，单位 m（Android 无法获取，返回 0）	1.2.0
      * horizontalAccuracy	水平精度，单位 m	1.2.0
      */
-
 }
