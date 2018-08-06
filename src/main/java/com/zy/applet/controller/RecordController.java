@@ -1,6 +1,9 @@
 package com.zy.applet.controller;
 
+import com.zy.applet.utils.Mp3ConcertPcmUtils;
+import com.zy.applet.utils.OlamiUtils;
 import com.zy.applet.utils.OssUploadFileUtils;
+import com.zy.applet.utils.ResponseMessageUtils;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sound.sampled.AudioInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -21,14 +25,13 @@ import java.util.UUID;
 @RestController
 public class RecordController {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(RecordController.class);
+    private final static Logger logger = LoggerFactory.getLogger(RecordController.class);
 
-//    @Value("${web.upload.path}")
-//    private String uploadPath;
     @ApiOperation(value="上传文件(小程序)")
     @PostMapping("/fileUpload")
-    public String upload(HttpServletRequest request, @RequestParam("file")MultipartFile[] files){
-        LOGGER.info("上传测试");
+    public ResponseMessageUtils upload(HttpServletRequest request, @RequestParam("file")MultipartFile[] files){
+        logger.info("上传测试");
+        OlamiUtils.Result result = null;
         //多文件上传
         if(files!=null && files.length>=1) {
             BufferedOutputStream bw = null;
@@ -41,6 +44,9 @@ public class RecordController {
 //                    //拷贝文件到输出文件对象
 //                    FileUtils.copyInputStreamToFile(files[0].getInputStream(), outFile);
                     OssUploadFileUtils.OssUploadFileInputStreamtest("wq-zy",fileName,files[0].getInputStream());
+                    AudioInputStream pcmAudioInputStream = Mp3ConcertPcmUtils.getPcmAudioInputStream(files[0].getInputStream());
+                    result = OlamiUtils.speechInput(pcmAudioInputStream);
+                    logger.info("speechInput:{}",result.getStatus());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -52,7 +58,12 @@ public class RecordController {
                 }
             }
         }
-        return "success";
+        if (result != null) {
+            return ResponseMessageUtils.ok(result);
+        }else {
+            return ResponseMessageUtils.error("未解析到数据！");
+        }
+
     }
 
     /**
