@@ -24,7 +24,7 @@ public class OssUploadFileUtils {
         ossClient.putObject(bucketName, yourObjectName, new ByteArrayInputStream(content.getBytes()));
         // 关闭OSSClient。
         ossClient.shutdown();
-        return "";
+        return "http://"+bucketName+".oss-cn-hangzhou.aliyuncs.com/"+ yourObjectName;
     }
     //上传Byte数组
     public static String OssUploadByte(String bucketName, String yourObjectName){
@@ -35,7 +35,7 @@ public class OssUploadFileUtils {
         ossClient.putObject(bucketName, yourObjectName, new ByteArrayInputStream(content));
         // 关闭OSSClient。
         ossClient.shutdown();
-        return "";
+        return "http://"+bucketName+".oss-cn-hangzhou.aliyuncs.com/"+ yourObjectName;
     }
 
     //上传网络流
@@ -47,7 +47,7 @@ public class OssUploadFileUtils {
         ossClient.putObject(bucketName, yourObjectName, inputStream);
         // 关闭OSSClient。
         ossClient.shutdown();
-        return "";
+        return "http://"+bucketName+".oss-cn-hangzhou.aliyuncs.com/"+ yourObjectName;
     }
 
 
@@ -60,7 +60,7 @@ public class OssUploadFileUtils {
         ossClient.putObject(bucketName, yourObjectName, inputStream);
         // 关闭OSSClient。
         ossClient.shutdown();
-        return "";
+        return "http://"+bucketName+".oss-cn-hangzhou.aliyuncs.com/"+ yourObjectName;
     }
 
 
@@ -73,7 +73,7 @@ public class OssUploadFileUtils {
         ossClient.putObject(bucketName, yourObjectName, inputStream);
         // 关闭OSSClient。
         ossClient.shutdown();
-        return "";
+        return "http://"+bucketName+".oss-cn-hangzhou.aliyuncs.com/"+ yourObjectName;
     }
 
     //上传文件
@@ -89,7 +89,7 @@ public class OssUploadFileUtils {
     }
 
     public static void main(String[] args) {
-        String url =OssUploadFile("wq-zy","picture/timg4.jpg","D:\\图片\\timg.jpg");
+        String url =OssUploadFile("wq-zy","applet/recording/z/timg4.jpg","D:\\图片\\timg.jpg");
         System.out.println(url);
     }
 }

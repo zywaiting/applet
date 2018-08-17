@@ -174,7 +174,7 @@ public class OlamiUtils {
      */
 
     public static void main(String[] args) {
-        String result ="";
+        String result ="{\"data\":{\"asr\":{\"result\":\"是测试测试测试\",\"requestId\":\"ffdc7a016e8111833c69e77cbdacf612\",\"speech_status\":0,\"final\":true,\"status\":0},\"seg\":\"是 测试 测试 测试 \",\"nli\":[{\"desc_obj\":{\"result\":\"对不起，你说的我还不懂，能换个说法吗？\",\"status\":1003},\"type\":\"ds\"}]},\"status\":\"ok\"}\n";
         Result resultStr = Utils.json(result, Result.class);
         System.out.println(resultStr.getData().getNliList().get(0).getDescObj().getResult());
         System.out.println(resultStr.getData().getAsr().getResult());
@@ -239,6 +239,15 @@ public class OlamiUtils {
         @JsonProperty(value = "final")
         private Boolean finalStr;
         private Integer status;
+        private String requestId;
+
+        public String getRequestId() {
+            return requestId;
+        }
+
+        public void setRequestId(String requestId) {
+            this.requestId = requestId;
+        }
 
         public String getResult() {
             return result;
