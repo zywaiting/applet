@@ -13,7 +13,7 @@ import java.net.URL;
  */
 public class PictureMergerUtils {
 
-    private Font font = new Font("微软雅黑", Font.PLAIN, 35);// 添加字体的属性设置
+    private Font font = new Font("微软雅黑", Font.PLAIN, 50);// 添加字体的属性设置
 
     private Graphics2D g = null;
 
@@ -248,7 +248,7 @@ public class PictureMergerUtils {
     public static void main(String[] args) {
         PictureMergerUtils pp = new PictureMergerUtils();
         try {
-            pp.getPictureMerge(200,200,new FileInputStream("D:\\test.jpg"),"尤磊");
+            pp.getPictureMerge(255,255,new FileInputStream("D:\\test.jpg"),"尤磊");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
