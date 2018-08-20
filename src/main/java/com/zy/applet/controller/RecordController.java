@@ -29,7 +29,7 @@ public class RecordController {
 
     @ApiOperation(value="上传文件(小程序)")
     @PostMapping("/fileUpload")
-    public ResponseMessageUtils upload(HttpServletRequest request, @RequestParam("file")MultipartFile[] files){
+    public ResponseMessageUtils upload(HttpServletRequest request, @RequestParam("file")MultipartFile[] files,@RequestParam("openId") String openId){
         OlamiUtils.Result result = null;
         //多文件上传
         if(files!=null && files.length>=1) {
@@ -42,7 +42,7 @@ public class RecordController {
 //                    File outFile = new File(uploadPath + UUID.randomUUID().toString()+ getFileType(fileName));
 //                    //拷贝文件到输出文件对象
 //                    FileUtils.copyInputStreamToFile(files[0].getInputStream(), outFile);
-                    OssUploadFileUtils.OssUploadFileInputStreamtest("wq-zy", "applet/recording/" + fileName, files[0].getInputStream());
+                    OssUploadFileUtils.OssUploadFileInputStreamtest("wq-zy", "applet/recording/" + openId + "/" + fileName, files[0].getInputStream());
                     AudioInputStream pcmAudioInputStream = Mp3ConcertPcmUtils.getPcmAudioInputStream(files[0].getInputStream());
                     result = OlamiUtils.speechInput(pcmAudioInputStream);
                     logger.info("speechInput:{}",result.getStatus());
