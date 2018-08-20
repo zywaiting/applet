@@ -38,9 +38,11 @@ import java.util.Map;
  * HTTP工具类，支持HTTP和HTTPS同步调用。
  * 重载方法get、post方法微HTTP调用；
  * 重载方法gets、posts方法微HTTPS调用；
+ * HEAD
  *
- * @author ZY
+ * @author zy
  * @version 1.0
+ * 借用
  */
 public abstract class HttpUtils {
     private static Logger logger = LoggerFactory.getLogger(HttpUtils.class);
@@ -110,6 +112,25 @@ public abstract class HttpUtils {
         String urlArgs = appendToUrl(url, serialize);
         return execute(httpClient, new HttpGet(urlArgs));
     }
+
+    public static String getHeader(String url, String encoding,KeyValue[] headers) {
+        HttpGet httpGet = new HttpGet(url);
+        for (KeyValue keyValue : headers){
+            httpGet.setHeader(keyValue.getKey(),keyValue.getValue().toString());
+        }
+        return execute(httpClient, httpGet, encoding);
+    }
+
+    public static String getHeader(String url, KeyValue[] headers, KeyValue... args) {
+        String serialize = serialize(args);
+        String urlArgs = appendToUrl(url, serialize);
+        HttpGet httpGet = new HttpGet(urlArgs);
+        for (KeyValue keyValue : headers){
+            httpGet.setHeader(keyValue.getKey(),keyValue.getValue().toString());
+        }
+        return execute(httpClient, httpGet);
+    }
+
 
     /**
      * 发送HTTP GET请求，必须响应JSON数据，并且将JSON数据转换成对于的类型
@@ -204,6 +225,23 @@ public abstract class HttpUtils {
      */
     public static String post(String url, String encoding, KeyValue... args) {
         HttpPost httpPost = new HttpPost(url);
+        httpPost.setEntity(adapter(encoding, args));
+        return execute(httpClient, httpPost, encoding);
+    }
+
+    public static String postHeader(String url, String encoding,KeyValue[] headers) {
+        HttpPost httpPost = new HttpPost(url);
+        for (KeyValue keyValue : headers){
+            httpPost.setHeader(keyValue.getKey(),keyValue.getValue().toString());
+        }
+        return execute(httpClient, httpPost, encoding);
+    }
+
+    public static String postHeader(String url, String encoding,KeyValue[] headers, KeyValue... args) {
+        HttpPost httpPost = new HttpPost(url);
+        for (KeyValue keyValue : headers){
+            httpPost.setHeader(keyValue.getKey(),keyValue.getValue().toString());
+        }
         httpPost.setEntity(adapter(encoding, args));
         return execute(httpClient, httpPost, encoding);
     }
