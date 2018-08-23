@@ -33,4 +33,9 @@ public class UserConfigServiceImpl implements UserConfigService {
     public Integer updateUserConfigByOpenId(UserConfig userConfig) {
         return userConfigMapper.updateUserConfigByOpenId(userConfig);
     }
+
+    @Override
+    public UserConfig selectByOpenId(String openId) {
+        return userConfigMapper.selectByOpenId(openId);
+    }
 }

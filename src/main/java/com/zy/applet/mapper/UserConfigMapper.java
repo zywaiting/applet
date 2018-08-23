@@ -17,5 +17,7 @@ public interface UserConfigMapper {
     Integer insterUserConfig(UserConfig userConfig);
     //补全用户信息
     Integer updateUserConfigByOpenId(UserConfig userConfig);
+    //查询用户信息
+    UserConfig selectByOpenId(@Param("openId") String openId);
 
 }
