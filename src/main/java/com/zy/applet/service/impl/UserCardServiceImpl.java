@@ -36,18 +36,25 @@ public class UserCardServiceImpl implements UserCardService {
     public Integer createUserCard(UserCard userCard) {
 
         String avatarUrl = userConfigService.selectByOpenId(userCard.getOpenId()).getAvatarUrl();
+        String qrUrl = "BEGIN:VCARD\n" +
+                "N:" + userCard.getName() + "\n" +
+                "TEL;TYPE=WORK:" + userCard.getMobile() + "\n" +
+                "EMAIL:" + userCard.getEmail() + "\n" +
+                "NOTE:" + userCard.getQq() + "\n" +
+                "ORG:" + userCard.getCompany() + "\n" +
+                "TIL:" + userCard.getTil() + "\n" +
+                "ADR:" + userCard.getAdr() + "\n" +
+                "END:VCARD";
         if (StringUtils.isNotBlank(avatarUrl)){
-            String qrUrl = "BEGIN:VCARD\n" +
-                    "N:" + userCard.getName() + "\n" +
-                    "TEL;TYPE=WORK:" + userCard.getMobile() + "\n" +
-                    "EMAIL:" + userCard.getEmail() + "\n" +
-                    "NOTE:" + userCard.getQq() + "\n" +
-                    "ORG:" + userCard.getCompany() + "\n" +
-                    "TIL:" + userCard.getTil() + "\n" +
-                    "ADR:" + userCard.getAdr() + "\n" +
-                    "END:VCARD";
-
             ByteArrayInputStream byteArrayInputStream = CreateCodeUtils.drawLogoQRCode(avatarUrl, qrUrl);
+            try {
+                String imageUrl = OssUploadFileUtils.OssUploadFileInputStreamtest("wq-zy", "applet/recording/" + userCard.getOpenId() + "/" + UUID.randomUUID() + ".png", byteArrayInputStream);
+                userCard.setImageUrl(imageUrl);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }else {
+            ByteArrayInputStream byteArrayInputStream = CreateCodeUtils.drawLogoQRCode("https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKBcD51SvG3DSiaR0nxFibibkLkrShdXo6Vz1pdsADuMMLC49vn4xvZlczZmoNVQyS3ORp1EUSBO6gLQ/132", qrUrl);
             try {
                 String imageUrl = OssUploadFileUtils.OssUploadFileInputStreamtest("wq-zy", "applet/recording/" + userCard.getOpenId() + "/" + UUID.randomUUID() + ".png", byteArrayInputStream);
                 userCard.setImageUrl(imageUrl);
