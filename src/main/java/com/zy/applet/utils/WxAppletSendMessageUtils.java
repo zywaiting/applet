@@ -40,7 +40,7 @@ public class WxAppletSendMessageUtils {
         data.put("keyword1",keyword1);
         data.put("keyword2",keyword2);
         wx.setData(data);
-        String url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=12_gaHFJAKXp4CjNI7OSd73gQ5cz1JdkrBSU5ZT_BMbV9EbUWkUDQ9MkYrB1RZMUbgMjemAAQlKrFQFc_EdzW7x53KFEGvBVCpjcfzelu-_cwUI-o_bzYo87yNYNZkZOQdAAANCE";
+        String url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=13_I8NR8mRadBOKF8X4Vt1DuyR_h6BJk-9ydvHiwnqC423N8w1_28zv3oKN5WyHa5t_Hj-5S1mkLZI4opJ_1lo2d0ncl7cLXEZZMItogm3aXE-Vldtgat9pYEc4RA2QXklBxnmgzzpSeuKc1L0NSMWbABAYSC";
         String resultStr = HttpUtils.post(url, JSONObject.toJSONString(wx));
         Result result = Utils.json(resultStr, Result.class);
         if (0 == result.getErrcode()) {
@@ -56,7 +56,7 @@ public class WxAppletSendMessageUtils {
 
 
     public static void main(String[] args) {
-        Result result = wxAppletSendMessageUtils("e28DKDZV1TzLKX7Onqf9A5n-p-o7pYCRjDgTYxS31KM", "index", "1534752596283", "oN0r64iMqmugQLBezsxMV3gqM48g");
+        Result result = wxAppletSendMessageUtils("e28DKDZV1TzLKX7Onqf9A5n-p-o7pYCRjDgTYxS31KM", "index", "eca758e35fd40b32daadeb7618027c57", "oN0r64p84PRaadEP4wqNJit6ubGg");
         System.out.println(result.errcode);
     }
 
