@@ -40,7 +40,7 @@ public class UserCardServiceImpl implements UserCardService {
                 "N:" + userCard.getName() + "\n" +
                 "TEL;TYPE=WORK:" + userCard.getMobile() + "\n" +
                 "EMAIL:" + userCard.getEmail() + "\n" +
-                "NOTE:" + userCard.getQq() + "\n" +
+                "NOTE:" + userCard.getRemake() + "\n" +
                 "ORG:" + userCard.getCompany() + "\n" +
                 "TIL:" + userCard.getTil() + "\n" +
                 "ADR:" + userCard.getAdr() + "\n" +
