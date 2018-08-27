@@ -1,15 +1,17 @@
 package com.zy.applet.controller;
 
+import com.zy.applet.mapper.LoginMapper;
+import com.zy.applet.pojo.AppletConfig;
 import com.zy.applet.utils.Mp3ConcertPcmUtils;
 import com.zy.applet.utils.OlamiUtils;
 import com.zy.applet.utils.OssUploadFileUtils;
 import com.zy.applet.utils.ResponseMessageUtils;
+import com.zy.applet.utils.baiduUtils.BaiDuAsrUtils;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,14 +20,15 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.sound.sampled.AudioInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 @RestController
 public class RecordController {
 
     private final static Logger logger = LoggerFactory.getLogger(RecordController.class);
+
+    @Autowired
+    private LoginMapper loginMapper;
 
     @ApiOperation(value="上传文件(小程序)")
     @PostMapping("/fileUpload")
@@ -57,10 +60,36 @@ public class RecordController {
                 }
             }
         }
-        if (result != null) {
+//        logger.info("1:{}",result != null);
+//        logger.info("2:{}",result.getData() != null);
+//        logger.info("3:{}",result.getData().getNliList()!=null);
+//        logger.info("4:{}",result.getData().getNliList().get(0) != null);
+//        logger.info("5:{}",result.getData().getNliList().get(0).getDataObjList() != null);
+//        logger.info("6:{}",result.getData().getNliList().get(0).getDataObjList().size());
+        if (result != null && result.getData() != null && result.getData().getNliList() != null && result.getData().getNliList().size() > 0  && result.getData().getNliList().get(0) != null
+                && result.getData().getNliList().get(0).getDataObjList() != null && result.getData().getNliList().get(0).getDataObjList().size() > 0) {
+            AppletConfig appletConfig = loginMapper.selectAppletConfig("baudu_token");
+            String context = "";
+            String ask = "";
+            if (StringUtils.isNotBlank(result.getData().getNliList().get(0).getDataObjList().get(0).getContent()) || StringUtils.isNotBlank(result.getData().getNliList().get(0).getDescObj().getResult())) {
+                if (StringUtils.isNotBlank(result.getData().getNliList().get(0).getDataObjList().get(0).getContent())){
+                    context = result.getData().getNliList().get(0).getDataObjList().get(0).getContent();
+                }
+                if (StringUtils.isNotBlank(result.getData().getNliList().get(0).getDescObj().getResult())){
+                    ask = result.getData().getNliList().get(0).getDescObj().getResult();
+                }
+                String baiDuRestUtils = BaiDuAsrUtils.baiDuRestUtils(appletConfig, ask + context, "0");
+                result.setUrl(baiDuRestUtils);
+            }
             return ResponseMessageUtils.ok(result);
-        }else {
-            return ResponseMessageUtils.error("未解析到数据！");
+        } else {
+            AppletConfig appletConfig = loginMapper.selectAppletConfig("baudu_token");
+            if (result != null && result.getData() != null && result.getData().getNliList() != null && result.getData().getNliList().size() > 0 && result.getData().getNliList().get(0) != null
+                    && result.getData().getNliList().get(0).getDescObj() != null && StringUtils.isNotBlank(result.getData().getNliList().get(0).getDescObj().getResult())) {
+                String baiDuRestUtils = BaiDuAsrUtils.baiDuRestUtils(appletConfig, result.getData().getNliList().get(0).getDescObj().getResult(), "0");
+                result.setUrl(baiDuRestUtils);
+            }
+            return ResponseMessageUtils.ok(result);
         }
 
     }

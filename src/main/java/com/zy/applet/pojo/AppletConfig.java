@@ -18,6 +18,15 @@ public class AppletConfig {
     private String accessToken;
     private String reamke;
     private String express;
+    private String apiKey;
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
     public Integer getId() {
         return id;

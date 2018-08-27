@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.applet.mapper.VoicePromptsMapper">
+    <select id="selectVoicePromptsByKey" resultType="com.zy.applet.pojo.VoicePrompts">
+        SELECT * FROM `voice_prompts` WHERE `key` = #{key}
+    </select>
+</mapper>

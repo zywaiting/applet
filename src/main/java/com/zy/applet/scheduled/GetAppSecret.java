@@ -18,7 +18,11 @@ public class GetAppSecret {
 
     @Scheduled(cron = "0 0/30 * * * ?")
     public void getAppSecret(){
-        System.out.println("1111111");
         configService.updateAppSecret();
+    }
+
+    @Scheduled(cron = "0 0 0 0/10 * ?")
+    public void getBaiDuToken(){
+        configService.updateBaiDuToken();
     }
 }

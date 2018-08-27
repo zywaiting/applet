@@ -32,15 +32,15 @@ public class WxAppletSendMessageUtils {
 
 
         T keyword1 = new T();
-        keyword1.setValue("111");
+        keyword1.setValue("齐伟豪,你怎么不生成名片看看呢!");
 
         T keyword2 = new T();
-        keyword2.setValue("22222");
+        keyword2.setValue("测试看看,点我的!");
 
         data.put("keyword1",keyword1);
         data.put("keyword2",keyword2);
         wx.setData(data);
-        String url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=13_I8NR8mRadBOKF8X4Vt1DuyR_h6BJk-9ydvHiwnqC423N8w1_28zv3oKN5WyHa5t_Hj-5S1mkLZI4opJ_1lo2d0ncl7cLXEZZMItogm3aXE-Vldtgat9pYEc4RA2QXklBxnmgzzpSeuKc1L0NSMWbABAYSC";
+        String url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=13_w-xIY2xZ497qe-7iQHB8arFrBXxqLPOelCqWL3EhGdOLjIzzKminYtQNnYlz-ywBxp6UUip4Zd2ybQHgUB58_dqgWlZnjOWX-cOMxmBgV95cjGmmPGJSKd--1axCN8VIDOrc1VcjlJju8ohRGMMbADARXX";
         String resultStr = HttpUtils.post(url, JSONObject.toJSONString(wx));
         Result result = Utils.json(resultStr, Result.class);
         if (0 == result.getErrcode()) {
@@ -56,7 +56,7 @@ public class WxAppletSendMessageUtils {
 
 
     public static void main(String[] args) {
-        Result result = wxAppletSendMessageUtils("e28DKDZV1TzLKX7Onqf9A5n-p-o7pYCRjDgTYxS31KM", "index", "eca758e35fd40b32daadeb7618027c57", "oN0r64p84PRaadEP4wqNJit6ubGg");
+        Result result = wxAppletSendMessageUtils("e28DKDZV1TzLKX7Onqf9A5n-p-o7pYCRjDgTYxS31KM", "pages/specialty/specialty", "ff9178af0f18e323bf2beea8c31936b4", "oN0r64lLw7elZnGvq6cIbYcg7h8M");
         System.out.println(result.errcode);
     }
 

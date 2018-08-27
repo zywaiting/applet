@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 //语音识别
@@ -143,46 +144,57 @@ public class OlamiUtils {
         }
     }
 
-//    public static void main(String[] args) {
-//        long startTime=System.currentTimeMillis();   //获取开始时间
-//        String speechInput = speechInput("http://wq-zy.oss-cn-hangzhou.aliyuncs.com/picture/test.pcm");
-//        System.out.println(speechInput);
-//        long endTime=System.currentTimeMillis(); //获取结束时间
-//
-//        System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
-//    }
+    public static Result textRecognizer(String text) {
+        Result result = null;
+        try {
+            // 创建 APIConfiguration 对象
+            APIConfiguration config = new APIConfiguration(appKey, appSecret, APIConfiguration.LOCALIZE_OPTION_SIMPLIFIED_CHINESE);
+            // 创建文本识别器对象
+            TextRecognizer recoginzer = new TextRecognizer(config);
+            // 请求 "今天星期几" 的分词结果
+            APIResponse response1 = recoginzer.requestWordSegmentation(text);
+            // 检查请求结果
+            if (response1.ok() && response1.hasData()) {
+                // 取得分词结果
+                String[] ws = response1.getData().getWordSegmentation();
+            }
+            // 请求 "今天星期几" 的 NLI 语义分析或 IDS 智能答复与数据
+            APIResponse response2 = recoginzer.requestNLI(text);
+            // 检查请求结果
+            if (response2.ok() && response2.hasData()) {
+                // 取得 NLI 语义分析或 IDS 智能答复与数据
+                String toString = response2.toString();
+                result = Utils.json(toString, Result.class);
+            }
+        }catch (Exception e){
+            logger.warn("语义理解出现异常:{}",e.getMessage());
+        }
+        return result;
+    }
 
-    /**
-     * speechInput:
-      {"data":
-             {
-    	"asr":{"result":"五加三加二","speech_status":0,"final":true,"status":0},
-     	"seg":"五加 三 加 二 ",
-     	"nli":[{
-     		"desc_obj":{"result":"结果等于10。","status":0},
-     		"data_obj":[{
-     			"result":"10","content":"结果等于10。"
-                }],
-     		"type":"math"}]
-        },
-     "status":"ok"}
-     */
 
-    /**
-     *
-     * @param args
-     */
 
-    public static void main(String[] args) {
-        String result ="{\"data\":{\"asr\":{\"result\":\"是测试测试测试\",\"requestId\":\"ffdc7a016e8111833c69e77cbdacf612\",\"speech_status\":0,\"final\":true,\"status\":0},\"seg\":\"是 测试 测试 测试 \",\"nli\":[{\"desc_obj\":{\"result\":\"对不起，你说的我还不懂，能换个说法吗？\",\"status\":1003},\"type\":\"ds\"}]},\"status\":\"ok\"}\n";
-        Result resultStr = Utils.json(result, Result.class);
-        System.out.println(resultStr.getData().getNliList().get(0).getDescObj().getResult());
-        System.out.println(resultStr.getData().getAsr().getResult());
+
+    public static void main(String[] args) throws Exception {
+        Result result = textRecognizer("今天星期几");
+//        String result ="{\"data\":{\"asr\":{\"result\":\"是测试测试测试\",\"requestId\":\"ffdc7a016e8111833c69e77cbdacf612\",\"speech_status\":0,\"final\":true,\"status\":0},\"seg\":\"是 测试 测试 测试 \",\"nli\":[{\"desc_obj\":{\"result\":\"对不起，你说的我还不懂，能换个说法吗？\",\"status\":1003},\"type\":\"ds\"}]},\"status\":\"ok\"}\n";
+//        Result resultStr = Utils.json(result, Result.class);
+//        System.out.println(resultStr.getData().getNliList().get(0).getDescObj().getResult());
+//        System.out.println(resultStr.getData().getAsr().getResult());
     }
 
     public static class Result{
         private Data data;
         private String status;
+        private String url;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
 
         public Data getData() {
             return data;
