@@ -35,7 +35,7 @@ public class LoginController {
     //所用小程序用户登录接口
     @RequestMapping("onLoginAll")
     public ResponseMessageUtils onLoginAll(String code, String express, String name, String userInfo) {
-        logger.info("调用了用户登录接口---------------onLogin");
+        logger.info("调用了用户登录接口---------------onLoginAll");
         String openId = loginService.onLoginAll(code, express, name, userInfo);
         return ResponseMessageUtils.ok(openId);
     }
