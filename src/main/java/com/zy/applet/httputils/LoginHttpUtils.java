@@ -13,7 +13,6 @@ import com.zy.applet.utils.Utils;
  */
 public class LoginHttpUtils {
     public static Result loginHttpUtils(String code, String appId, String appSecret, String url) {
-        KeyValue keyValue = new KeyValue();
         KeyValue[] keyValues = new KeyValue[]{
           new KeyValue("appid",appId),      
           new KeyValue("secret",appSecret),      
