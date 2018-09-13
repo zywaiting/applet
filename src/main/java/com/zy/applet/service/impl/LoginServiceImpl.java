@@ -62,8 +62,11 @@ public class LoginServiceImpl implements LoginService {
         AppletConfig appletConfig = loginMapper.selectAppletConfig(express);
         AppletUrl appletUrl = appletUrlService.selectAppletUrl(appUrl);
         LoginHttpUtils.Result result = LoginHttpUtils.loginHttpUtils(code, appletConfig.getAppId(), appletConfig.getAppSecret(), appletUrl.getUrl());
+        UserConfig userConfig = new UserConfig();
+        if (StringUtils.isNotBlank(userInfo) && userInfo.length() > 0){
+            userConfig = Utils.json(userInfo, UserConfig.class);
+        }
         if (result != null && !StringUtils.isEmpty(result.getOpenid())) {
-            UserConfig userConfig = new UserConfig();
             userConfig.setAppid(appletConfig.getAppId());
             userConfig.setOpenId(result.getOpenid());
             userConfig.setUnionId(result.getUnionid());
