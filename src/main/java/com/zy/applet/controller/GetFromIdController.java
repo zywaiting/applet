@@ -2,7 +2,6 @@ package com.zy.applet.controller;
 
 import com.zy.applet.service.GetFromIdService;
 import com.zy.applet.utils.ResponseMessageUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class GetFromIdController {
-    private final static Logger logger = LoggerFactory.getLogger(CrityController.class);
+    private final static Logger logger = LoggerFactory.getLogger(GetFromIdController.class);
 
     @Autowired
     private GetFromIdService getFromIdService;

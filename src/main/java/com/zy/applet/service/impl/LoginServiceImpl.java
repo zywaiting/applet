@@ -56,6 +56,25 @@ public class LoginServiceImpl implements LoginService {
         }
         return "";
     }
+
+    @Override
+    public String onLoginAll(String code, String express, String appUrl, String userInfo) {
+        AppletConfig appletConfig = loginMapper.selectAppletConfig(express);
+        AppletUrl appletUrl = appletUrlService.selectAppletUrl(appUrl);
+        LoginHttpUtils.Result result = LoginHttpUtils.loginHttpUtils(code, appletConfig.getAppId(), appletConfig.getAppSecret(), appletUrl.getUrl());
+        if (result != null && !StringUtils.isEmpty(result.getOpenid())) {
+            UserConfig userConfig = new UserConfig();
+            userConfig.setAppid(appletConfig.getAppId());
+            userConfig.setOpenId(result.getOpenid());
+            userConfig.setUnionId(result.getUnionid());
+            Integer integer = userConfigService.selectCountUserConfigByOpenId(userConfig.getOpenId());
+            if (integer <= 0) {
+                userConfigService.insterUserConfig(userConfig);
+            }
+            return result.getOpenid();
+        }
+        return "";
+    }
     /**
      * latitude	纬度，浮点数，范围为-90~90，负数表示南纬
      * longitude	经度，浮点数，范围为-180~180，负数表示西经

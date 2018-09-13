@@ -1,4 +1,4 @@
-package com.zy.applet.controller;
+package com.zy.applet.controller.word;
 
 import com.zy.applet.pojo.Travel;
 import com.zy.applet.service.TravelService;

@@ -29,4 +29,14 @@ public class LoginController {
         String openId = loginService.onLogin(code, express, name, userInfo, location);
         return ResponseMessageUtils.ok(openId);
     }
+
+
+
+    //所用小程序用户登录接口
+    @RequestMapping("onLoginAll")
+    public ResponseMessageUtils onLoginAll(String code, String express, String name, String userInfo) {
+        logger.info("调用了用户登录接口---------------onLogin");
+        String openId = loginService.onLoginAll(code, express, name, userInfo);
+        return ResponseMessageUtils.ok(openId);
+    }
 }

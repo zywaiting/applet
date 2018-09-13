@@ -26,6 +26,7 @@ public class UserConfig {
      */
 
     private Integer id;
+    private String appid;
     private String openId;
     private String userName;
     private String password;
@@ -46,6 +47,13 @@ public class UserConfig {
     private String horizontalAccuracy;
     private String unionId;
 
+    public String getAppid() {
+        return appid;
+    }
+
+    public void setAppid(String appid) {
+        this.appid = appid;
+    }
 
     private String errMsg;
 

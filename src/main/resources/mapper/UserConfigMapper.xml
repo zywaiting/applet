@@ -8,9 +8,9 @@
     </select>
     <!--插入用户信息-->
     <insert id="insterUserConfig" parameterType="com.zy.applet.pojo.UserConfig">
-        INSERT INTO `user_config` (`opne_id`,`nick_name`,`avatar_url`,`gender`,`city`,`province`,`country`,`language`,`union_id`,
+        INSERT INTO `user_config` (`appid`,`opne_id`,`nick_name`,`avatar_url`,`gender`,`city`,`province`,`country`,`language`,`union_id`,
         `latitude`,`longitude`,`speed`,`accuracy`,`vertical_accuracy`,`horizontal_accuracy`,`credit_date`,`update_date`)
-        VALUES (#{openId},#{nickName},#{avatarUrl},#{gender},#{city},#{province},#{country},#{language},#{unionId},
+        VALUES (#{appid},#{openId},#{nickName},#{avatarUrl},#{gender},#{city},#{province},#{country},#{language},#{unionId},
         #{latitude},#{longitude},#{speed},#{accuracy},#{verticalAccuracy},#{horizontalAccuracy},NOW(),NOW())
     </insert>
     <!--补全用户信息-->

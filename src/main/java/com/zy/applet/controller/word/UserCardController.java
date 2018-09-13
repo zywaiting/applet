@@ -1,14 +1,12 @@
-package com.zy.applet.controller;
+package com.zy.applet.controller.word;
 
 import com.zy.applet.pojo.UserCard;
 import com.zy.applet.service.UserCardService;
 import com.zy.applet.utils.ResponseMessageUtils;
 import com.zy.applet.utils.Utils;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

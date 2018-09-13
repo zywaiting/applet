@@ -1,11 +1,9 @@
 package com.zy.applet.service.impl;
 
-import com.zy.applet.controller.UserCardController;
 import com.zy.applet.mapper.UserCardMapper;
 import com.zy.applet.pojo.UserCard;
 import com.zy.applet.service.UserCardService;
 import com.zy.applet.service.UserConfigService;
-import com.zy.applet.utils.ByteToInputStreamUtils;
 import com.zy.applet.utils.CreateCodeUtils;
 import com.zy.applet.utils.OssUploadFileUtils;
 import org.apache.commons.lang3.StringUtils;
