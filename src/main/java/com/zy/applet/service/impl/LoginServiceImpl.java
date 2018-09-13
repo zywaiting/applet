@@ -73,6 +73,8 @@ public class LoginServiceImpl implements LoginService {
             Integer integer = userConfigService.selectCountUserConfigByOpenId(userConfig.getOpenId());
             if (integer <= 0) {
                 userConfigService.insterUserConfig(userConfig);
+            }else {
+                userConfigService.updateUserConfigByOpenId(userConfig);
             }
             return result.getOpenid();
         }
