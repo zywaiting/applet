@@ -89,7 +89,7 @@ public class OssUploadFileUtils {
     }
 
     public static void main(String[] args) {
-        String url =OssUploadFile("wq-zy","applet/recording/z/timg4.jpg","D:\\图片\\timg.jpg");
+        String url =OssUploadFile("wq-zy","UAmp4riXty.txt","D:\\图片\\UAmp4riXty.txt");
         System.out.println(url);
     }
 }
