@@ -15,4 +15,9 @@
         VALUES (#{openId},#{page},#{express},#{crediteDate},#{con1},#{con2},#{con3},#{con4},#{con5},#{con6},#{con7},#{con8},#{con9},#{con10},#{con11},#{con12},#{con13},#{con14},#{con15},#{con16},#{con17},#{con18},#{con19},#{con20},#{remake})
     </insert>
 
+    <!--查询index样式-->
+    <select id="selectLoveIndexStyle" resultType="com.zy.applet.pojo.LoveIndexStyle">
+        SELECT * FROM `love_index_style` WHERE `express` = #{express}
+    </select>
+
 </mapper>

@@ -27,18 +27,17 @@
 
 <script src="/love_files/modernizr-2.6.2.min.js"></script>
 </head>
-<body><a href="https://zhuyao.xin/index" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+<body><a href="http://h5.hunlipic.com/biaobai_mohuanlizi/#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 
 <div class="fh5co-loader" style="display: none;"></div>
 
 <div class="dnone"><img width="121" src="/images/zz.jpg" alt="logo"></div>
 
-
 <div id="fh5co-page">
     <section id="fh5co-header">
         <div class="container">
             <nav role="navigation">
-                <h1 id="fh5co-logo"><a href="https://zhuyao.xin/index">浪漫分享网<span>.</span></a></h1>
+                <h1 id="fh5co-logo"><a href="http://h5.hunlipic.com/">浪漫分享网<span>.</span></a></h1>
                 <ul class="pull-left left-menu">
                 <li><a href="https://zhuyao.xin/index">关于我们</a></li>
                 <li><a href="https://zhuyao.xin/index">联系我们</a></li>
@@ -51,46 +50,40 @@
         </div>
     </section>
 
-    <section id="fh5co-hero" class="no-js-fullheight" style="background: #888888;" data-next="yes">
-        <div class="fh5co-overlay"></div>
-        <div class="container">
-            <div class="fh5co-intro no-js-fullheight">
-                <div class="fh5co-intro-text">
-                    <div class="fh5co-center-position">
-                        <h2 class="animate-box fadeInUp animated">${title}</h2>
-                        <h3 class="animate-box fadeInUp animated">Love web page making</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="fh5co-learn-more animate-box fadeInUp animated" style="margin-left: -48px;">
-            <a href="https://zhuyao.xin/index" class="scroll-btn">
-                <span class="text">填入网页信息</span>
-                <span class="arrow">
-                    <i class="icon-chevron-down"></i>
-                </span>
-            </a>
-        </div>
-    </section>
+<section id="fh5co-hero" class="no-js-fullheight" style="background-image: url(../images/nav-biaobai.jpg);" data-next="yes">
+<div class="fh5co-overlay"></div>
+<div class="container">
+<div class="fh5co-intro no-js-fullheight">
+<div class="fh5co-intro-text">
+<div class="fh5co-center-position">
+<h2 class="animate-box fadeInUp animated">ERROR</h2>
+<h3 class="animate-box fadeInUp animated"><a href="http://h5.hunlipic.com/web.php?id=wd6zzw1" style="color:#FFF" target="_blank">点击预览</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="fh5co-learn-more animate-box fadeInUp animated" style="margin-left: -48px;"> <a href="http://h5.hunlipic.com/biaobai_mohuanlizi/#" class="scroll-btn">
+    <span class="text">填入网页信息</span> <span class="arrow"><i class="icon-chevron-down"></i></span> </a>
+</div>
+</section>
+
+<div>
+    <h1>ERROR</h1>
+</div>
 
 
-    <section id="fh5co-projects">
-        ${body}
-    </section>
-
-    <div id="fh5co-info">
-    <div class="container">
-    <div class="row">
-    <div class="col-md-12">
-    <h2 class="fh5co-lead animate-box">网页制作说明：</h2>
-    <p class="fh5co-sub-lead animate-box">1.网页内容请根据实际长度输入，输入过长可能造成页面混乱，可以不输入留空，推荐多次制作进行测试，直到最满意的效果。</p>
-    <p class="fh5co-sub-lead animate-box">2.自定义图片和自定义音乐请进入相应的页面上传，然后将获取的外链地址完整复制到输入框即可，或者点击使用默认文字按钮设置为默认。</p>
-    <p class="fh5co-sub-lead animate-box">3.为了给大家更好的体验，本系统无需注册、无需登入，并且无上限免费制作，制作的网页永久保存到服务器，大家可以放心使用。</p>
-    <p class="fh5co-sub-lead animate-box">4.请携手营造良好的互联网环境，严禁制作违反微信、QQ空间、微博等等各大社交平台管理协议的网站，以及包含诱导类、谣言类、欺诈类关键词，如：点击、刷、领取等。本系统会自动屏蔽常见的违规关键词以及人工排查，一经发现将立即进行永久屏蔽、封IP段处理。</p>
-    </div>
-    </div>
-    </div>
-    </div>
+<div id="fh5co-info">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<h2 class="fh5co-lead animate-box">网页制作说明：</h2>
+<p class="fh5co-sub-lead animate-box">1.网页内容请根据实际长度输入，输入过长可能造成页面混乱，可以不输入留空，推荐多次制作进行测试，直到最满意的效果。</p>
+<p class="fh5co-sub-lead animate-box">2.自定义图片和自定义音乐请进入相应的页面上传，然后将获取的外链地址完整复制到输入框即可，或者点击使用默认文字按钮设置为默认。</p>
+<p class="fh5co-sub-lead animate-box">3.为了给大家更好的体验，本系统无需注册、无需登入，并且无上限免费制作，制作的网页永久保存到服务器，大家可以放心使用。</p>
+<p class="fh5co-sub-lead animate-box">4.请携手营造良好的互联网环境，严禁制作违反微信、QQ空间、微博等等各大社交平台管理协议的网站，以及包含诱导类、谣言类、欺诈类关键词，如：点击、刷、领取等。本系统会自动屏蔽常见的违规关键词以及人工排查，一经发现将立即进行永久屏蔽、封IP段处理。</p>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -102,10 +95,6 @@
 
 <script src="/love_files/bootstrap-datetimepicker.js"></script>
 <script src="/love_files/bootstrap-datetimepicker.zh-CN.js"></script>
-
-<script>
-    ${script}
-</script>
 <script type="text/javascript">
  $(".form_datetime").datetimepicker({
       　minView: "month", //选择日期后，不会再跳转去选择时分秒 

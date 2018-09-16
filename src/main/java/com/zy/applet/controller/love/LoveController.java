@@ -1,8 +1,11 @@
 package com.zy.applet.controller.love;
 
+import com.zy.applet.pojo.LoveIndexStyle;
 import com.zy.applet.pojo.LovePage;
 import com.zy.applet.pojo.LovePageContext;
 import com.zy.applet.service.LoveService;
+import com.zy.applet.utils.CreateCodeUtils;
+import com.zy.applet.utils.OssUploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 @Controller
 public class LoveController {
@@ -20,7 +25,13 @@ public class LoveController {
     private LoveService loveService;
 
     @RequestMapping("/index")
-    public String toIndex(){
+    public String toIndex(HttpServletRequest request){
+        Map map = new HashMap();
+        List<LoveIndexStyle> loveIndexStyleList = loveService.selectLoveIndexStyle("index");
+        for (LoveIndexStyle loveIndexStyle : loveIndexStyleList) {
+            map.put(loveIndexStyle.getPage(),loveIndexStyle.getStyle());
+        }
+        request.setAttribute("loveIndexStyle",map);
         return "index";
     }
 
@@ -34,7 +45,7 @@ public class LoveController {
             request.setAttribute("script",lovePage.getScript());
             return "page";
         }else{
-            return "index";
+            return "error";
         }
     }
 
@@ -45,24 +56,34 @@ public class LoveController {
         String con3 = request.getParameter("con3");
         String con1 = request.getParameter("con1");
         String con2 = request.getParameter("con2");
+        String url = "https://zhuyao.xin/mohuanlizi/" + con3;
         LovePageContext lovePageContext1 = loveService.selectLovePageContextByCon3(con3);
         if (lovePageContext1 == null) {
             LovePageContext lovePageContext = new LovePageContext();
             lovePageContext.setPage("mohuanlizi");
-            lovePageContext.setExpress("https://zhuyao.xin/mohuanlizi/" + con3);
+            lovePageContext.setExpress(url);
             lovePageContext.setCon1(con1);
             lovePageContext.setCon2(con2);
             lovePageContext.setCon3(con3);
             lovePageContext.setCrediteDate(new Date());
             Integer integer = loveService.insterLovePageContext(lovePageContext);
             if (integer > 0) {
-                request.setAttribute("url","https://zhuyao.xin/mohuanlizi/" + con3);
+                String imageUrl = "";
+                ByteArrayInputStream byteArrayInputStream = CreateCodeUtils.drawLogoQRCode("https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKBcD51SvG3DSiaR0nxFibibkLkrShdXo6Vz1pdsADuMMLC49vn4xvZlczZmoNVQyS3ORp1EUSBO6gLQ/132", url);
+                try {
+                    imageUrl = OssUploadFileUtils.OssUploadFileInputStreamtest("wq-zy", "love/love_picture/" + UUID.randomUUID() + ".png", byteArrayInputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    return "error";
+                }
+                request.setAttribute("url",url);
+                request.setAttribute("picture",imageUrl);
                 return "return";
             }else {
-                return "index";
+                return "error";
             }
         }
-        return "index";
+        return "error";
     }
 
 
