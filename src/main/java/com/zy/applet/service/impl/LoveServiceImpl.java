@@ -22,8 +22,8 @@ public class LoveServiceImpl implements LoveService {
     }
 
     @Override
-    public LovePageContext selectLovePageContextByCon3(String con3) {
-        return loveMapper.selectLovePageContextByCon3(con3);
+    public LovePageContext selectLovePageContextByMark(String mark) {
+        return loveMapper.selectLovePageContextByMark(mark);
     }
 
     @Override

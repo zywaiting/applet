@@ -10,7 +10,7 @@ public interface LoveService {
     //查找页面
     LovePage selectLovePageByExpress(String express);
     //查询信息
-    LovePageContext selectLovePageContextByCon3(String con3);
+    LovePageContext selectLovePageContextByMark(String mark);
     //插入一条记录
     Integer insterLovePageContext(LovePageContext lovePageContext);
     //查询index样式

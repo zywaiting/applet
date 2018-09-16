@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/love_files/style1.css" media="screen" type="text/css">
 </head>
 <body class="body--ready">
-<embed height="0" width="0" src="https://wq-zy.oss-cn-hangzhou.aliyuncs.com/MP3/renzhendexue.mp3">
+
 <audio id="audios" src="https://wq-zy.oss-cn-hangzhou.aliyuncs.com/MP3/renzhendexue.mp3" autoplay controls="controls"></audio>
 
 
@@ -557,8 +557,8 @@
     }());
     S.init();
 </script>
-<div>
-    <a href="https://zhuyao.xin/index" style="text-align: center"><font style="font-size: 35px;text-align: center;color: darkblue;"><b>返回</b></font></a>
+<div style="text-align: center">
+    <a href="https://zhuyao.xin/index" style="text-align: center"><font style="font-size: 35px;color: #4cae4c;"><b>返回</b></font></a>
 </div>
 <%--<div style="display:none">--%>
     <%--<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");--%>

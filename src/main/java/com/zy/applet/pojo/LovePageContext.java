@@ -35,6 +35,7 @@ public class LovePageContext {
     private Integer id;
     private String openId;
     private String page;
+    private String mark;
     private String express;
     private String con1;
     private String con2;
@@ -58,6 +59,14 @@ public class LovePageContext {
     private String con20;
     private Date crediteDate;
     private String remake;
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
 
     public String getRemake() {
         return remake;

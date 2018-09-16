@@ -16,7 +16,7 @@ public interface LoveMapper {
     //查找页面
     LovePage selectLovePageByExpress(@Param("express") String express);
     //查询信息
-    LovePageContext selectLovePageContextByCon3(@Param("con3") String con3);
+    LovePageContext selectLovePageContextByMark(@Param("mark") String mark);
     //插入一条记录
     Integer insterLovePageContext(LovePageContext lovePageContext);
     //查询index样式

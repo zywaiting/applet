@@ -5,14 +5,14 @@
         SELECT * FROM `love_page` WHERE `express` = #{express}
     </select>
 
-    <select id="selectLovePageContextByCon3" resultType="com.zy.applet.pojo.LovePageContext">
-        SELECT * FROM `love_page_context` WHERE `con3` = #{con3}
+    <select id="selectLovePageContextByMark" resultType="com.zy.applet.pojo.LovePageContext">
+        SELECT * FROM `love_page_context` WHERE `mark` = #{mark}
     </select>
 
     <!--插入一条表白记录-->
     <insert id="insterLovePageContext" parameterType="com.zy.applet.pojo.LovePageContext">
-        INSERT INTO `love_page_context` (`open_id`,`page`,`express`,`credite_date`,`con1`,`con2`,`con3`,`con4`,`con5`,`con6`,`con7`,`con8`,`con9`,`con10`,`con11`,`con12`,`con13`,`con14`,`con15`,`con16`,`con17`,`con18`,`con19`,`con20`,`remake`)
-        VALUES (#{openId},#{page},#{express},#{crediteDate},#{con1},#{con2},#{con3},#{con4},#{con5},#{con6},#{con7},#{con8},#{con9},#{con10},#{con11},#{con12},#{con13},#{con14},#{con15},#{con16},#{con17},#{con18},#{con19},#{con20},#{remake})
+        INSERT INTO `love_page_context` (`open_id`,`page`,`mark`,`express`,`credite_date`,`con1`,`con2`,`con3`,`con4`,`con5`,`con6`,`con7`,`con8`,`con9`,`con10`,`con11`,`con12`,`con13`,`con14`,`con15`,`con16`,`con17`,`con18`,`con19`,`con20`,`remake`)
+        VALUES (#{openId},#{page},#{mark},#{express},#{crediteDate},#{con1},#{con2},#{con3},#{con4},#{con5},#{con6},#{con7},#{con8},#{con9},#{con10},#{con11},#{con12},#{con13},#{con14},#{con15},#{con16},#{con17},#{con18},#{con19},#{con20},#{remake})
     </insert>
 
     <!--查询index样式-->
