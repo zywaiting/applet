@@ -1,10 +1,8 @@
 package com.zy.applet.service;
 
-import com.zy.applet.pojo.Order;
-
-import java.util.List;
+import java.util.Map;
 
 public interface OrderListService {
 
-    List<Order> selectOrderList(Integer isPay, String openid, Integer isShip);
+    Map selectOrderList(String openid);
 }

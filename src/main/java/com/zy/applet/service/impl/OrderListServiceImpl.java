@@ -8,9 +8,7 @@ import com.zy.applet.service.OrderListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrderListServiceImpl implements OrderListService {
@@ -19,11 +17,24 @@ public class OrderListServiceImpl implements OrderListService {
     private OrderListMapper orderListMapper;
 
     @Override
-    public List<Order> selectOrderList(Integer isPay,String openid,Integer isShip) {
+    public Map selectOrderList(String openid) {
 
-        List<Order> orderList = orderListMapper.selectOrderByIsPay(isPay, openid, isShip);
+        Map map = new HashMap();
+        //未付款,未发货
+        List<Order> orderListNoPay = orderListMapper.selectOrderByIsPay(0, openid, 0);
+        map.put("nopay",order(orderListNoPay));
+
+        List<Order> orderListNoShip = orderListMapper.selectOrderByIsPay(1, openid, 0);
+        map.put("noship",order(orderListNoShip));
+
+        List<Order> orderListShip = orderListMapper.selectOrderByIsPay(1, openid, 1);
+        map.put("ship",order(orderListShip));
+
+        return map;
+    }
+
+    private List<Order> order(List<Order> orderList){
         for (Order order : orderList) {
-
             List<OrderGoods> orderGoodsList = orderListMapper.selectOrderGoodsByOrderId(order.getId());
             for (OrderGoods orderGoods : orderGoodsList) {
                 Goods goods = orderListMapper.selectGoodsByGoodsId(orderGoods.getGoodsId());
@@ -31,8 +42,6 @@ public class OrderListServiceImpl implements OrderListService {
             }
             order.setOrderGoodsList(orderGoodsList);
         }
-
         return orderList;
     }
-
 }
