@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.applet.mapper.OrderListMapper">
+
+    <select id="selectOrderByIsPay" resultType="com.zy.applet.pojo.Order">
+        SELECT * FROM `order` WHERE `openid` = #{openid} AND `is_pay` = #{isPay} AND `is_ship` = #{isShip} AND `status` = 1
+    </select>
+
+    <select id="selectOrderGoodsByOrderId" resultType="com.zy.applet.pojo.OrderGoods">
+        SELECT * FROM `order_goods` WHERE `order_id` = #{orderId}
+    </select>
+
+    <select id="selectGoodsByGoodsId" resultType="com.zy.applet.pojo.Goods">
+        SELECT * FROM `goods` WHERE `id` = #{id}
+    </select>
+
+</mapper>

@@ -1,4 +1,4 @@
-package com.zy.applet.controller.love;
+package com.zy.applet.controller.garden;
 
 import com.zy.applet.pojo.LoveIndexStyle;
 import com.zy.applet.pojo.LovePage;
