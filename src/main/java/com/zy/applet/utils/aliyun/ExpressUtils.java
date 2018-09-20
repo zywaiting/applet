@@ -37,12 +37,12 @@ public class ExpressUtils {
     }
 
 
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
 
       AppletConfig appletConfig = new AppletConfig();
       appletConfig.setAccessToken("9938a15fb02141daa68f9b6405376187");
-      expressUtils(appletConfig,"3376411097451","");
-    }*/
+      expressUtils(appletConfig,"801634501300121508","");
+    }
 
     /**
      * {"code":"OK",
@@ -62,26 +62,26 @@ public class ExpressUtils {
      * }
      */
 
-    public static void main(String[] args) {
-        String json = "{\"code\":\"OK\",\n" +
-                "\"no\":\"3376411097451\",\n" +
-                "\"type\":\"STO\",\n" +
-                "\"list\":[\n" +
-                "\t{\"content\":\"安徽砀山公司-已发往-安徽蚌埠转运中心\",\"time\":\"2018-09-19 17:31:19\"},\n" +
-                "\t{\"content\":\"安徽砀山公司-已进行装车扫描\",\"time\":\"2018-09-19 17:31:19\"},\n" +
-                "\t{\"content\":\"安徽砀山公司-良梨罐头-已收件\",\"time\":\"2018-09-19 17:29:54\"}\n" +
-                "],\n" +
-                "\"state\":\"2\",\n" +
-                "\"msg\":\"查询成功\",\n" +
-                "\"name\":\"申通快递\",\n" +
-                "\"site\":\"www.sto.cn\",\n" +
-                "\"phone\":\"95543\",\n" +
-                "\"logo\":\"http://img3.fegine.com/express/sto.jpg\"\n" +
-                "}";
-
-        Result json1 = Utils.json(json, Result.class);
-        System.out.println(json1.getCode());
-    }
+//    public static void main(String[] args) {
+//        String json = "{\"code\":\"OK\",\n" +
+//                "\"no\":\"3376411097451\",\n" +
+//                "\"type\":\"STO\",\n" +
+//                "\"list\":[\n" +
+//                "\t{\"content\":\"安徽砀山公司-已发往-安徽蚌埠转运中心\",\"time\":\"2018-09-19 17:31:19\"},\n" +
+//                "\t{\"content\":\"安徽砀山公司-已进行装车扫描\",\"time\":\"2018-09-19 17:31:19\"},\n" +
+//                "\t{\"content\":\"安徽砀山公司-良梨罐头-已收件\",\"time\":\"2018-09-19 17:29:54\"}\n" +
+//                "],\n" +
+//                "\"state\":\"2\",\n" +
+//                "\"msg\":\"查询成功\",\n" +
+//                "\"name\":\"申通快递\",\n" +
+//                "\"site\":\"www.sto.cn\",\n" +
+//                "\"phone\":\"95543\",\n" +
+//                "\"logo\":\"http://img3.fegine.com/express/sto.jpg\"\n" +
+//                "}";
+//
+//        Result json1 = Utils.json(json, Result.class);
+//        System.out.println(json1.getCode());
+//    }
 
 
     public static class Result{
