@@ -39,9 +39,18 @@ public class Order {
     private Integer status;
     private Date createTime;
     private Date updateTime;
+    private String shipName;
 
     //数据库之外
     private List<OrderGoods> orderGoodsList;
+
+    public String getShipName() {
+        return shipName;
+    }
+
+    public void setShipName(String shipName) {
+        this.shipName = shipName;
+    }
 
     public List<OrderGoods> getOrderGoodsList() {
         return orderGoodsList;

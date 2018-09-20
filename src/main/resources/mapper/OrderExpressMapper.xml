@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.applet.mapper.OrderExpressMapper">
+    <select id="selectExpressContentByExpressNo" resultType="com.zy.applet.pojo.ExpressContent">
+        SELECT * FROM `express_content` WHERE `openid` = #{opneid} AND `express_no` = #{expressNo}
+    </select>
+
+    <update id="updateExpressContentByExpressNo" parameterType="com.zy.applet.pojo.ExpressContent">
+        UPDATE `express_content` SET `content` = #{content}, `update_date` = #{updateDate},`status` = #{status}
+        WHERE `openid` = #{openid} AND `express_no` = #{expressNo}
+    </update>
+
+    <insert id="insterExpressContent" parameterType="com.zy.applet.pojo.ExpressContent">
+        INSERT INTO `express_content` (`openid`,`express_no`,`content`,`update_date`,`credit_date`,`status`)
+        VALUES (#{openid},#{expressNo},#{content},#{updateDate},#{creditDate},#{status})
+    </insert>
+
+
+</mapper>

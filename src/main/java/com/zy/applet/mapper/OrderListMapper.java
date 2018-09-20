@@ -23,4 +23,7 @@ public interface OrderListMapper {
     //查询商品信息
     Goods selectGoodsByGoodsId(@Param("id") Integer id);
 
+    //查询某个订单的信息
+    Order selectOrderGoodsByOrderNumber(@Param("orderNumber") String orderNumber);
+
 }

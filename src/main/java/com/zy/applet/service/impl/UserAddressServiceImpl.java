@@ -18,5 +18,10 @@ public class UserAddressServiceImpl implements UserAddressService {
     public List<UserAddress> selectUserAddressByOpenid(String openid,String isDefault) {
         return userAddressMapper.selectUserAddressByOpenid(openid,isDefault);
     }
+
+    @Override
+    public Integer insterUserAddress(UserAddress userAddress) {
+        return userAddressMapper.insterUserAddress(userAddress);
+    }
 }
 

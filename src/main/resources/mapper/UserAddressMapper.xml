@@ -5,4 +5,9 @@
         SELECT * FROM `user_address` WHERE `openid` = #{openid} AND `is_default` = #{isDefault} AND `address_flag` = 1
     </select>
 
+    <insert id="insterUserAddress" parameterType="com.zy.applet.pojo.UserAddress">
+        INSERT INTO `user_address` (`openid`,`name`,`phone`,`address`,`is_default`,`address_flag`,`create_date`,`update_date`)
+        VALUES (#{openid},#{name},#{phone},#{address},#{isDefault},#{addressFlag},#{createDate},#{updateDate})
+    </insert>
+
 </mapper>

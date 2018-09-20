@@ -11,4 +11,7 @@ public interface UserAddressMapper {
 
     //查询用户
     List<UserAddress> selectUserAddressByOpenid(@Param("openid") String openid,@Param("isDefault") String isDefault);
+
+    //插入用户地址
+    Integer insterUserAddress(UserAddress userAddress);
 }
