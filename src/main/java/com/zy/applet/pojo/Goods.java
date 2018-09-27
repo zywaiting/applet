@@ -40,6 +40,18 @@ public class Goods {
     private String gallery;
     private Date createTime;
 
+    //数据库之外
+    private Integer num;
+
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
     public Integer getId() {
         return id;
     }

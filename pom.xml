@@ -163,6 +163,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!--自己写的jar包-->
+		<dependency>
+			<groupId>com.github.zywaiting</groupId>
+			<artifactId>easyexcelutil</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
     </dependencies>
 
 	<build>

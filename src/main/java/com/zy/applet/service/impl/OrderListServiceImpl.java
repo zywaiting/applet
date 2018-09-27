@@ -2,6 +2,7 @@ package com.zy.applet.service.impl;
 
 import com.zy.applet.mapper.OrderListMapper;
 import com.zy.applet.pojo.Goods;
+import com.zy.applet.pojo.GoodsShopcar;
 import com.zy.applet.pojo.Order;
 import com.zy.applet.pojo.OrderGoods;
 import com.zy.applet.service.OrderListService;
@@ -31,6 +32,23 @@ public class OrderListServiceImpl implements OrderListService {
         map.put("ship",order(orderListShip));
 
         return map;
+    }
+
+    @Override
+    public List<Goods> selectGoodsShopcarList(String openid) {
+        List<GoodsShopcar> goodsShopcarList = orderListMapper.selectGoodsShopcarList(openid, 1);
+        List<Goods> goodsList = new ArrayList<>();
+        for (GoodsShopcar goodsShopcar : goodsShopcarList) {
+            Goods goods = orderListMapper.selectGoodsByGoodsId(goodsShopcar.getGoodsId());
+            goods.setNum(goodsShopcar.getNum());
+            goodsList.add(goods);
+        }
+        return goodsList;
+    }
+
+    @Override
+    public Integer updateGoodsShopcarGoodsNum(String openid, String goodsId, Integer goodsNum) {
+        return orderListMapper.updateGoodsShopcarGoodsNum(goodsNum, openid, goodsId, 1);
     }
 
     private List<Order> order(List<Order> orderList){

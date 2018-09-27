@@ -1,6 +1,7 @@
 package com.zy.applet.mapper;
 
 import com.zy.applet.pojo.Goods;
+import com.zy.applet.pojo.GoodsShopcar;
 import com.zy.applet.pojo.Order;
 import com.zy.applet.pojo.OrderGoods;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,5 +26,12 @@ public interface OrderListMapper {
 
     //查询某个订单的信息
     Order selectOrderGoodsByOrderNumber(@Param("orderNumber") String orderNumber);
+
+    //查询这个人的购物车信息
+    List<GoodsShopcar> selectGoodsShopcarList(@Param("openid")String openid,@Param("status") Integer status);
+
+    //更新购物车商品数量
+    Integer updateGoodsShopcarGoodsNum(@Param("goodsNum") Integer goodsNum,@Param("openid") String openid, @Param("goodsId") String goodsId, @Param("status") Integer status);
+
 
 }

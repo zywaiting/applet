@@ -18,4 +18,12 @@
         SELECT * FROM `order` WHERE `order_number` = #{orderNumber}
     </select>
 
+    <select id="selectGoodsShopcarList" resultType="com.zy.applet.pojo.GoodsShopcar">
+        SELECT * FROM `goods_shopcar` WHERE `openid` = #{openid} AND `status` = #{status}
+    </select>
+
+    <update id="updateGoodsShopcarGoodsNum">
+        UPDATE `goods_shopcar` SET `num` = #{goodsNum} WHERE `status` = #{status} AND `goods_id` = #{goodsId} AND `openid` = #{openid}
+    </update>
+
 </mapper>
