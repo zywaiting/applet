@@ -56,6 +56,10 @@
     <update id="updateOrderOfAdderss">
         UPDATE `order` SET `address_id` = #{addAddressId} WHERE `order_number` = #{orderNumber}
     </update>
+
+    <select id="selectShopPayByPayPriceAndChannel" resultType="com.zy.applet.pojo.ShopPay">
+        SELECT * FROM `shop_pay` WHERE `channel` = #{channel} AND `pay_money` = #{payPrice}
+    </select>
     <!--`id` int(4) NOT NULL AUTO_INCREMENT COMMENT '主键、自增长',
   `order_id` int(10) DEFAULT NULL COMMENT '订单id，关联order表id字段',
   `goods_id` int(10) DEFAULT NULL COMMENT '商品id，关联goods表id字段',

@@ -1,9 +1,6 @@
 package com.zy.applet.mapper;
 
-import com.zy.applet.pojo.Goods;
-import com.zy.applet.pojo.GoodsShopcar;
-import com.zy.applet.pojo.Order;
-import com.zy.applet.pojo.OrderGoods;
+import com.zy.applet.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,6 +49,9 @@ public interface OrderListMapper {
     GoodsShopcar selectGoodsShopcarByGoodsIdAndOpenid(GoodsShopcar goodsShopcar);
 
     //更新订单地址
-    Integer updateOrderOfAdderss(String orderNumber,Integer id);
+    Integer updateOrderOfAdderss(@Param("orderNumber") String orderNumber,@Param("addAddressId") Integer addAddressId);
+
+    //查询用户需支付的金额图片
+    ShopPay selectShopPayByPayPriceAndChannel(@Param("payPrice") String payPrice,@Param("channel") String channel);
 
 }

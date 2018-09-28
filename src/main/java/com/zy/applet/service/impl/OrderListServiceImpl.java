@@ -136,7 +136,12 @@ public class OrderListServiceImpl implements OrderListService {
 
     @Override
     public Integer updateOrderOfAdderss(String orderNumber, Integer addAddressId) {
-        return orderListMapper.;
+        return orderListMapper.updateOrderOfAdderss(orderNumber,addAddressId);
+    }
+
+    @Override
+    public ShopPay selectShopPayByPayPriceAndChannel(String payPrice, String channel) {
+        return orderListMapper.selectShopPayByPayPriceAndChannel(payPrice,channel);
     }
 
 

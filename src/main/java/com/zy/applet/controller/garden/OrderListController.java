@@ -1,9 +1,6 @@
 package com.zy.applet.controller.garden;
 
-import com.zy.applet.pojo.CreateOrder;
-import com.zy.applet.pojo.Goods;
-import com.zy.applet.pojo.GoodsShopcar;
-import com.zy.applet.pojo.Order;
+import com.zy.applet.pojo.*;
 import com.zy.applet.service.OrderListService;
 import com.zy.applet.utils.ResponseMessageUtils;
 import com.zy.applet.utils.Utils;
@@ -101,5 +98,12 @@ public class OrderListController {
             orderListService.insterGoodsShopcar(openid, goodsId);
         }
         return ResponseMessageUtils.ok();
+    }
+
+    @RequestMapping("shop/orderPay")
+    @ApiOperation(value = "查询产品信息")
+    public ResponseMessageUtils orderPay(String orderNumber, String payPrice,String channel) {
+        ShopPay shopPay = orderListService.selectShopPayByPayPriceAndChannel(payPrice, channel);
+        return ResponseMessageUtils.ok(shopPay);
     }
 }

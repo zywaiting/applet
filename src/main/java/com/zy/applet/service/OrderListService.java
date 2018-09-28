@@ -3,6 +3,7 @@ package com.zy.applet.service;
 import com.zy.applet.pojo.Goods;
 import com.zy.applet.pojo.GoodsShopcar;
 import com.zy.applet.pojo.Order;
+import com.zy.applet.pojo.ShopPay;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,7 @@ public interface OrderListService {
 
     //更新订单地址
     Integer updateOrderOfAdderss(String orderNumber,Integer addAddressId);
+
+    //查询用户需支付的金额图片
+    ShopPay selectShopPayByPayPriceAndChannel(String payPrice,String channel);
 }
