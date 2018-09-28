@@ -14,7 +14,7 @@
         SELECT * FROM `goods` WHERE `id` = #{id}
     </select>
 
-    <select id="selectOrderGoodsByOrderNumber" resultType="com.zy.applet.pojo.Order">
+    <select id="selectOrderByOrderNumber" resultType="com.zy.applet.pojo.Order">
         SELECT * FROM `order` WHERE `order_number` = #{orderNumber}
     </select>
 
@@ -25,5 +25,44 @@
     <update id="updateGoodsShopcarGoodsNum">
         UPDATE `goods_shopcar` SET `num` = #{goodsNum} WHERE `status` = #{status} AND `goods_id` = #{goodsId} AND `openid` = #{openid}
     </update>
+
+    <insert id="insterOrder" parameterType="com.zy.applet.pojo.Order">
+        INSERT INTO `order` (`order_number`,`openid`,`pay_price`,`is_pay`,`pay_time`,`is_ship`,`ship_time`,`is_receipt`,`receipt_time`,`ship_name`,`ship_nmber`,`status`,`create_time`,`update_time`)
+        VALUES (#{orderNumber},#{openid},#{payPrice},#{isPay},#{payTime},#{isShip},#{shipTime},#{isReceipt},#{receiptTime},#{shipName},#{shipNmber},#{status},#{createTime},#{updateTime})
+    </insert>
+
+    <insert id="insterOrderGoods" parameterType="com.zy.applet.pojo.OrderGoods">
+        INSERT INTO `order_goods` (`order_id`,`goods_id`,`goods_num`,`goods_price`,`status`,`create_time`,`update_time`)
+        VALUES (#{orderId},#{goodsId},#{goodsNum},#{goodsPrice},#{status},#{createTime},#{updateTime})
+    </insert>
+
+    <update id="updateGoodsShopcarStatus">
+        UPDATE `goods_shopcar` SET `status` = 0 WHERE `status` = #{status}
+    </update>
+
+    <select id="selectGoodsById" resultType="com.zy.applet.pojo.Goods">
+        SELECT * FROM `goods` WHERE `id` = #{id}
+    </select>
+
+    <insert id="insterGoodsShopcar" parameterType="com.zy.applet.pojo.GoodsShopcar">
+        INSERT INTO `goods_shopcar` (`openid`,`goods_id`,`num`,`status`,`create_time`,`update_time`)
+        VALUES (#{openid},#{goodsId},#{num},#{status},#{createTime},#{updateTime})
+    </insert>
+
+    <select id="selectGoodsShopcarByGoodsIdAndOpenid" resultType="com.zy.applet.pojo.GoodsShopcar">
+        SELECT * from `goods_shopcar` WHERE `openid` = #{openid} AND `goods_id` = #{goodsId} AND `status` = #{status}
+    </select>
+
+    <update id="updateOrderOfAdderss">
+        UPDATE `order` SET `address_id` = #{addAddressId} WHERE `order_number` = #{orderNumber}
+    </update>
+    <!--`id` int(4) NOT NULL AUTO_INCREMENT COMMENT '主键、自增长',
+  `order_id` int(10) DEFAULT NULL COMMENT '订单id，关联order表id字段',
+  `goods_id` int(10) DEFAULT NULL COMMENT '商品id，关联goods表id字段',
+  `goods_num` int(10) DEFAULT NULL COMMENT '商品购买数量',
+  `goods_price` decimal(10,2) DEFAULT NULL COMMENT '单个商品价格',
+  `status` tinyint(4) DEFAULT NULL COMMENT '记录状态。1：正常，0：禁用，-1：删除',
+  `create_time` datetime DEFAULT NULL COMMENT '记录创建时间，时间戳',
+  `update_time` datetime DEFAULT NULL COMMENT '记录更新时间，时间戳',-->
 
 </mapper>

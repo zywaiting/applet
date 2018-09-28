@@ -1,6 +1,7 @@
 package com.zy.applet.controller.garden;
 
 import com.zy.applet.pojo.UserAddress;
+import com.zy.applet.service.OrderListService;
 import com.zy.applet.service.UserAddressService;
 import com.zy.applet.utils.ResponseMessageUtils;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +19,8 @@ public class UserAddressController {
 
     @Autowired
     private UserAddressService userAddressService;
+    @Autowired
+    private OrderListService orderListService;
 
     @RequestMapping("address")
     @ApiOperation(value = "用户地址")
@@ -43,6 +46,15 @@ public class UserAddressController {
         userAddress.setUpdateDate(new Date());
         userAddress.setCreateDate(new Date());
         userAddressService.insterUserAddress(userAddress);
+        return ResponseMessageUtils.ok();
+    }
+
+
+    @RequestMapping("orderAddAddress")
+    @ApiOperation(value = "用户地址")
+    public ResponseMessageUtils orderAddAddress(String orderNumber,Integer id) {
+        UserAddress userAddress = userAddressService.selectUserAddressById(id);
+        orderListService.updateOrderOfAdderss(orderNumber,id);
         return ResponseMessageUtils.ok();
     }
 }

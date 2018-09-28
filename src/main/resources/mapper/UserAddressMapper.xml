@@ -10,4 +10,7 @@
         VALUES (#{openid},#{name},#{phone},#{address},#{isDefault},#{addressFlag},#{createDate},#{updateDate})
     </insert>
 
+    <select id="selectUserAddressById" resultType="com.zy.applet.pojo.UserAddress">
+        SELECT * FROM `user_address` WHERE `id` = #{id}
+    </select>
 </mapper>

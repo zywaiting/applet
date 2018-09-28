@@ -2,6 +2,7 @@ package com.zy.applet.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 产品表
@@ -42,7 +43,15 @@ public class Goods {
 
     //数据库之外
     private Integer num;
+    private List<String> imgList;//图片地址
 
+    public List<String> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(List<String> imgList) {
+        this.imgList = imgList;
+    }
 
     public Integer getNum() {
         return num;

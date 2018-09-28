@@ -23,5 +23,10 @@ public class UserAddressServiceImpl implements UserAddressService {
     public Integer insterUserAddress(UserAddress userAddress) {
         return userAddressMapper.insterUserAddress(userAddress);
     }
+
+    @Override
+    public UserAddress selectUserAddressById(Integer id) {
+        return userAddressMapper.selectUserAddressById(id);
+    }
 }
 

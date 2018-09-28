@@ -34,7 +34,7 @@ public class Order {
     private Integer isShip;
     private Date shipTime;
     private Integer isReceipt;
-    private Date receipt_time;
+    private Date receiptTime;
     private String shipNmber;
     private Integer status;
     private Date createTime;
@@ -132,12 +132,12 @@ public class Order {
         this.isReceipt = isReceipt;
     }
 
-    public Date getReceipt_time() {
-        return receipt_time;
+    public Date getReceiptTime() {
+        return receiptTime;
     }
 
-    public void setReceipt_time(Date receipt_time) {
-        this.receipt_time = receipt_time;
+    public void setReceiptTime(Date receiptTime) {
+        this.receiptTime = receiptTime;
     }
 
     public String getShipNmber() {

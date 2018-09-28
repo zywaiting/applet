@@ -13,4 +13,7 @@ public interface UserAddressService {
     //插入用户地址
     Integer insterUserAddress(UserAddress userAddress);
 
+    //查询地址
+    UserAddress selectUserAddressById(Integer id);
+
 }

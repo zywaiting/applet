@@ -14,4 +14,7 @@ public interface UserAddressMapper {
 
     //插入用户地址
     Integer insterUserAddress(UserAddress userAddress);
+
+    //查询地址
+    UserAddress selectUserAddressById(@Param("id")Integer id);
 }
