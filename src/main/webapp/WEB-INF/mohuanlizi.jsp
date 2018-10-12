@@ -557,6 +557,27 @@
     }());
     S.init();
 </script>
+
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+
+<script>
+    function openSdaXcx(){
+        // javascript
+        wx.miniProgram.switchTab({url: '/pages/index/index'})
+    }
+</script>
+<div style="text-align: center">
+    <a onclick="openSdaXcx()"><font style="font-size: 100px;color: #4cae4c;"><b>返回到小程序页面</b></font></a>
+</div>
+<div>
+    --------------------
+</div>
+<div>
+    --------------------
+</div>
+<div>
+    --------------------
+</div>
 <div style="text-align: center">
     <a href="https://zhuyao.xin/index" style="text-align: center"><font style="font-size: 35px;color: #4cae4c;"><b>返回</b></font></a>
 </div>

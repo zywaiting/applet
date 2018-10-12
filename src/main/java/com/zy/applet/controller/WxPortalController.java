@@ -1,4 +1,4 @@
-package com.zy.applet.wxchat.controller;
+package com.zy.applet.controller;
 
 import com.zy.applet.wxchat.config.WxMpConfiguration;
 import me.chanjar.weixin.mp.api.WxMpService;

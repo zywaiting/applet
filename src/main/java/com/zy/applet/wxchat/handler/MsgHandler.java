@@ -1,5 +1,10 @@
 package com.zy.applet.wxchat.handler;
 
+import com.zy.applet.pojo.BusConfig;
+import com.zy.applet.service.RealTimeBusService;
+import com.zy.applet.utils.OlamiUtils;
+import com.zy.applet.utils.ResponseMessageUtils;
+import com.zy.applet.utils.busUtils.SouZhouBusUtils;
 import com.zy.applet.wxchat.builder.TextBuilder;
 import com.zy.applet.wxchat.utils.JsonUtils;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -8,8 +13,11 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
@@ -19,6 +27,9 @@ import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
  */
 @Component
 public class MsgHandler extends AbstractHandler {
+
+    @Autowired
+    private RealTimeBusService realTimeBusService;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
@@ -30,20 +41,44 @@ public class MsgHandler extends AbstractHandler {
         }
 
         //当用户输入关键词如“你好”，“客服”等，并且有客服在线时，把消息转发给在线客服
-        try {
-            if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服")
-                && weixinService.getKefuService().kfOnlineList()
-                .getKfOnlineList().size() > 0) {
-                return WxMpXmlOutMessage.TRANSFER_CUSTOMER_SERVICE()
-                    .fromUser(wxMessage.getToUser())
-                    .toUser(wxMessage.getFromUser()).build();
-            }
-        } catch (WxErrorException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服")
+//                && weixinService.getKefuService().kfOnlineList()
+//                .getKfOnlineList().size() > 0) {
+//                return WxMpXmlOutMessage.TRANSFER_CUSTOMER_SERVICE()
+//                    .fromUser(wxMessage.getToUser())
+//                    .toUser(wxMessage.getFromUser()).build();
+//            }
+//        } catch (WxErrorException e) {
+//            e.printStackTrace();
+//        }
+
+        String content = "";
 
         //TODO 组装回复消息
-        String content = "收到信息内容：" + JsonUtils.toJson(wxMessage);
+        if (StringUtils.endsWith(wxMessage.getContent(), "公交")) {
+            logger.info("调用了realTimeBus接口---------------api/realTimeBus");
+            logger.info("wxMessage.getContent()--------------->{}",wxMessage.getContent());
+            List<BusConfig> busConfig = realTimeBusService.selectBusConfigByCrityAndBusName("苏州", wxMessage.getContent().replaceAll("公交",""));
+            if ("苏州".equals("苏州")) {
+                logger.info("busConfig.getBusId()--------------->{}",busConfig.get(0).getBusId());
+                SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(busConfig.get(0).getBusId());
+                List<SouZhouBusUtils.Data> data = result.getData();
+                SouZhouBusUtils.Result resultNew = new SouZhouBusUtils.Result();
+                List<SouZhouBusUtils.Data> dataNew = new ArrayList<>();
+                for (SouZhouBusUtils.Data datum : data) {
+                    if (StringUtils.isNotBlank(datum.getBusInfo())) {
+                        dataNew.add(datum);
+                    }
+                }
+                resultNew.setData(dataNew);
+                content = JsonUtils.toJson(resultNew);
+            }
+        }else {
+            OlamiUtils.Result result = OlamiUtils.textRecognizer(wxMessage.getContent());
+            content = result.getData().getNliList().get(0).getDescObj().getResult();
+        }
+
 
         return new TextBuilder().build(content, wxMessage, weixinService);
 

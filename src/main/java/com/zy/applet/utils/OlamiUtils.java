@@ -3,6 +3,7 @@ package com.zy.applet.utils;
 import ai.olami.cloudService.*;
 import ai.olami.nli.NLIResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zy.applet.wxchat.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -176,11 +177,13 @@ public class OlamiUtils {
 
 
     public static void main(String[] args) throws Exception {
-        Result result = textRecognizer("今天星期几");
+        Result result = textRecognizer("CCTV1！");
 //        String result ="{\"data\":{\"asr\":{\"result\":\"是测试测试测试\",\"requestId\":\"ffdc7a016e8111833c69e77cbdacf612\",\"speech_status\":0,\"final\":true,\"status\":0},\"seg\":\"是 测试 测试 测试 \",\"nli\":[{\"desc_obj\":{\"result\":\"对不起，你说的我还不懂，能换个说法吗？\",\"status\":1003},\"type\":\"ds\"}]},\"status\":\"ok\"}\n";
 //        Result resultStr = Utils.json(result, Result.class);
 //        System.out.println(resultStr.getData().getNliList().get(0).getDescObj().getResult());
 //        System.out.println(resultStr.getData().getAsr().getResult());
+        System.out.println(JsonUtils.toJson(result));
+        System.out.println(result.getData().getNliList().get(0).getDescObj().getResult());
     }
 
     public static class Result{
@@ -602,7 +605,7 @@ public class OlamiUtils {
         @JsonProperty(value = "photo_url")
         private String photoUrl;
         private String type;
-        private Integer[] highlight;
+        private Integer highlight;
         private String[] categorylist;
 
         //新闻模块（多轮对话支持）
@@ -913,11 +916,11 @@ public class OlamiUtils {
             this.type = type;
         }
 
-        public Integer[] getHighlight() {
+        public Integer getHighlight() {
             return highlight;
         }
 
-        public void setHighlight(Integer[] highlight) {
+        public void setHighlight(Integer highlight) {
             this.highlight = highlight;
         }
 

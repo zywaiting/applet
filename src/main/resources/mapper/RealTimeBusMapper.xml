@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.applet.mapper.RealTimeBusMapper">
+
+    <insert id="inster" parameterType="java.lang.String">
+        INSERT INTO `text` (`json`) values (#{post})
+    </insert>
+
+    <select id="select" resultType="java.lang.String">
+        SELECT `json` FROM `text` LIMIT 1
+    </select>
+
+    <select id="selectBusConfigByCrityAndBusName" resultType="com.zy.applet.pojo.BusConfig">
+        SELECT * FROM `bus_config` WHERE `crity` = #{crity} AND `bus_name` = #{busName}
+    </select>
+</mapper>
