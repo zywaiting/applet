@@ -1,6 +1,7 @@
 package com.zy.applet.wxchat.handler;
 
 import com.zy.applet.wxchat.builder.TextBuilder;
+import com.zy.applet.wxchat.utils.JsonUtils;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -30,6 +31,7 @@ public class SubscribeHandler extends AbstractHandler {
                 .userInfo(wxMessage.getFromUser(), null);
             if (userWxInfo != null) {
                 // TODO 可以添加关注用户到本地数据库
+                logger.info(JsonUtils.toJson(userWxInfo));
             }
         } catch (WxErrorException e) {
             if (e.getError().getErrorCode() == 48001) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.applet.mapper.BusMapper">
+
+    <select id="selectBusConfigByLikeBusName" resultType="com.zy.applet.pojo.BusConfig">
+        SELECT * FROM `bus_config`
+        <where>
+            <if test="crity!=''">`crity` = #{crity} </if>
+            <if test="busName!=''">AND `bus_name` LIKE CONCAT('%',#{busName},'%')</if>
+        </where>
+    </select>
+
+</mapper>
