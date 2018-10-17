@@ -27,4 +27,12 @@ public class BusServiceImpl implements BusService {
         }
         return null;
     }
+
+    @Override
+    public Object findBusWayNearby(String latitude, String longitude, String crity) {
+        if ("苏州".equals(crity)) {
+            return SouZhouBusUtils.souZhouBusUtils(latitude,longitude);
+        }
+        return null;
+    }
 }

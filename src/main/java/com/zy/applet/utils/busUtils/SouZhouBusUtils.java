@@ -21,6 +21,58 @@ public class SouZhouBusUtils {
         Result result = Utils.json(post, Result.class);
         return result;
     }
+    public static Result souZhouBusUtils(String latitude,String longitude,String lineID){
+        KeyValue[] keyValues = new KeyValue[]{
+                new KeyValue("latitude",latitude),
+                new KeyValue("longitude",longitude),
+                new KeyValue("lineID",lineID),
+        };
+        String post = HttpUtils.post("http://bus.2500.tv/api_line_nearby.php", keyValues).replaceAll("\uFEFF", "");
+        return null;
+    }
+
+    public static Result souZhouBusUtils(String latitude,String longitude){
+        KeyValue[] keyValues = new KeyValue[]{
+                new KeyValue("latitude",latitude),
+                new KeyValue("longitude",longitude)
+        };
+        String post = HttpUtils.post("http://bus.2500.tv/api_nearby.php", keyValues).replaceAll("\uFEFF", "");
+        System.out.println(post);
+        Result result = Utils.json(post, Result.class);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Result result = souZhouBusUtils("31.306507", "120.670319");
+        for (Data data : result.getData()) {
+            System.out.println(data.getStationCName());
+            System.out.println(data.getLongStr());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static class Result{
         private Integer status;
@@ -56,6 +108,46 @@ public class SouZhouBusUtils {
         private String outTime;
         @JsonProperty(value = "StationCName")
         private String stationCName;
+        @JsonProperty(value = "Position")
+        private String position;
+        @JsonProperty(value = "latitude")
+        private String latitude;
+        @JsonProperty(value = "longitude")
+        private String longitude;
+        @JsonProperty(value = "long")
+        private Integer longStr;
+
+        public String getPosition() {
+            return position;
+        }
+
+        public void setPosition(String position) {
+            this.position = position;
+        }
+
+        public String getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(String latitude) {
+            this.latitude = latitude;
+        }
+
+        public String getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(String longitude) {
+            this.longitude = longitude;
+        }
+
+        public Integer getLongStr() {
+            return longStr;
+        }
+
+        public void setLongStr(Integer longStr) {
+            this.longStr = longStr;
+        }
 
         public String getBusInfo() {
             return busInfo;

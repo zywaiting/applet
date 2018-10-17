@@ -36,4 +36,12 @@ public class BusController {
         return ResponseMessageUtils.ok(busWay);
     }
 
+
+    @RequestMapping(value = "api/buswaynearby")
+    public ResponseMessageUtils findBusWayNearby(String openid, String latitude, String longitude, String crity) {
+        logger.info("调用了查询附近公交车站---------------api/buswaynearby");
+        Object busWay = busService.findBusWayNearby(latitude, longitude, crity);
+        return ResponseMessageUtils.ok(busWay);
+    }
+
 }

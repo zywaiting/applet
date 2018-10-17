@@ -10,4 +10,7 @@ public interface BusService {
 
     //查询线路信息
     Object findBusWay(String busId,String crity);
+
+    //查询附近公交
+    Object findBusWayNearby(String latitude, String longitude, String crity);
 }
