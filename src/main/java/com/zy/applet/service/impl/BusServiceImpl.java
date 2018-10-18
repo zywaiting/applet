@@ -38,6 +38,7 @@ public class BusServiceImpl implements BusService {
                 datum.setNumber(number);
                 number++;
             }
+            result.setData(data);
             return result;
         }
         return null;
