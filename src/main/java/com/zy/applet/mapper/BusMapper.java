@@ -13,5 +13,5 @@ public interface BusMapper {
     List<BusConfig> selectBusConfigByLikeBusName(@Param("busName") String busName,@Param("crity") String crity);
 
     //查询车辆信息
-    BusConfig selectBusConfigByLikeBusNameOne(@Param("busName") String busName,@Param("crity") String crity);
+    BusConfig selectBusConfigByBusId(@Param("busId") String busId,@Param("crity") String crity);
 }

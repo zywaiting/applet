@@ -10,7 +10,7 @@
         </where>
     </select>
 
-    <select id="selectBusConfigByLikeBusNameOne" resultType="com.zy.applet.pojo.BusConfig">
-        SELECT * FROM `bus_config` WHERE `bus_name` = #{busName} AND `crity` = #{crity}
+    <select id="selectBusConfigByBusId" resultType="com.zy.applet.pojo.BusConfig">
+        SELECT * FROM `bus_config` WHERE `bus_id` = #{busId} AND `crity` = #{crity}
     </select>
 </mapper>

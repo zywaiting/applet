@@ -83,7 +83,11 @@ public class SouZhouBusUtils {
 
 
     public static void main(String[] args) {
-        Result result = souZhouBusUtils("10000444",1);
+        Result result = souZhouBusUtils("10002072",1);
+        for (Data data : result.getData()) {
+            System.out.println(data.getBusId());
+            System.out.println(data.getBusName());
+        }
     }
 
 

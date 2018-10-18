@@ -51,7 +51,7 @@ public class BusServiceImpl implements BusService {
             SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(stationid, 1);
             List<SouZhouBusUtils.Data> data = result.getData();
             for (SouZhouBusUtils.Data datum : data) {
-                BusConfig busConfig = busMapper.selectBusConfigByLikeBusNameOne(datum.getBusName(), crity);
+                BusConfig busConfig = busMapper.selectBusConfigByBusId(datum.getBusId(), crity);
                 datum.setBeginEnd(busConfig.getBeginEnd());
             }
             result.setData(data);
