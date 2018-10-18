@@ -96,6 +96,7 @@ public class SouZhouBusUtils {
     }
 
     public static class Data{
+        private Integer number;
         @JsonProperty(value = "BusInfo")
         private String busInfo;
         @JsonProperty(value = "Code")
@@ -116,6 +117,14 @@ public class SouZhouBusUtils {
         private String longitude;
         @JsonProperty(value = "long")
         private Integer longStr;
+
+        public Integer getNumber() {
+            return number;
+        }
+
+        public void setNumber(Integer number) {
+            this.number = number;
+        }
 
         public String getPosition() {
             return position;
