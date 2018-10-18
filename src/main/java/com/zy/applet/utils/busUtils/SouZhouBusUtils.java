@@ -52,7 +52,6 @@ public class SouZhouBusUtils {
     public static Result souZhouBusUtils(String stationID,Integer status){
         Result result = new Result();
         List<Data> dataList = new ArrayList<>();
-        Data data  = new Data();
         KeyValue[] keyValues = new KeyValue[]{
                 new KeyValue("stationID",stationID)
         };
@@ -61,6 +60,7 @@ public class SouZhouBusUtils {
         Document doc = Jsoup.parse(html);
         Elements elements = doc.getElementsByTag("dl");
         for (Element element : elements) {
+            Data data  = new Data();
             Elements b = element.getElementsByTag("b");
             Elements p = element.getElementsByTag("p");
             Elements a = element.getElementsByTag("a");
@@ -83,7 +83,7 @@ public class SouZhouBusUtils {
 
 
     public static void main(String[] args) {
-        Result result = souZhouBusUtils("10002072",1);
+        Result result = souZhouBusUtils("10001313",1);
         for (Data data : result.getData()) {
             System.out.println(data.getBusId());
             System.out.println(data.getBusName());
