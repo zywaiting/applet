@@ -15,5 +15,5 @@ public interface BusService {
     Object findBusWayNearby(String latitude, String longitude, String crity);
 
     //查询路线
-    Object findBusWayNearbyBus(String openid, String stationid, String crity);
+    Object findBusWayNearbyBus(String openid, String stationid,String stationcname, String crity);
 }

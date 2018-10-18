@@ -46,13 +46,14 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public Object findBusWayNearbyBus(String openid, String stationid,String crity) {
+    public Object findBusWayNearbyBus(String openid, String stationid,String stationcname,String crity) {
         if ("苏州".equals(crity)) {
             SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(stationid, 1);
             List<SouZhouBusUtils.Data> data = result.getData();
             for (SouZhouBusUtils.Data datum : data) {
                 BusConfig busConfig = busMapper.selectBusConfigByBusId(datum.getBusId(), crity);
                 datum.setBeginEnd(busConfig.getBeginEnd());
+                datum.setStationCName(stationcname);
             }
             result.setData(data);
             return result;
