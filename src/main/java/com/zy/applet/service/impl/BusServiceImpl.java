@@ -23,15 +23,7 @@ public class BusServiceImpl implements BusService {
     @Override
     public Object findBusWay(String busId, String crity) {
         if ("苏州".equals(crity)) {
-            return SouZhouBusUtils.souZhouBusUtils(busId);
-        }
-        return null;
-    }
-
-    @Override
-    public Object findBusWayNearby(String latitude, String longitude, String crity) {
-        if ("苏州".equals(crity)) {
-            SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(latitude, longitude);
+            SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(busId);
             List<SouZhouBusUtils.Data> data = result.getData();
             Integer number = 1;
             for (SouZhouBusUtils.Data datum : data) {
@@ -39,7 +31,14 @@ public class BusServiceImpl implements BusService {
                 number++;
             }
             result.setData(data);
-            return result;
+        }
+        return null;
+    }
+
+    @Override
+    public Object findBusWayNearby(String latitude, String longitude, String crity) {
+        if ("苏州".equals(crity)) {
+            return SouZhouBusUtils.souZhouBusUtils(latitude, longitude);
         }
         return null;
     }
