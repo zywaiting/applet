@@ -2,6 +2,7 @@ package com.zy.applet.service.impl;
 
 import com.zy.applet.mapper.BusMapper;
 import com.zy.applet.pojo.BusConfig;
+import com.zy.applet.pojo.KeyValue;
 import com.zy.applet.service.BusService;
 import com.zy.applet.utils.busUtils.SouZhouBusUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,21 @@ public class BusServiceImpl implements BusService {
     public Object findBusWayNearby(String latitude, String longitude, String crity) {
         if ("苏州".equals(crity)) {
             return SouZhouBusUtils.souZhouBusUtils(latitude, longitude);
+        }
+        return null;
+    }
+
+    @Override
+    public Object findBusWayNearbyBus(String openid, String stationid,String crity) {
+        if ("苏州".equals(crity)) {
+            SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(stationid, 1);
+            List<SouZhouBusUtils.Data> data = result.getData();
+            for (SouZhouBusUtils.Data datum : data) {
+                BusConfig busConfig = busMapper.selectBusConfigByLikeBusNameOne(datum.getBusName(), crity);
+                datum.setBeginEnd(busConfig.getBeginEnd());
+            }
+            result.setData(data);
+            return result;
         }
         return null;
     }

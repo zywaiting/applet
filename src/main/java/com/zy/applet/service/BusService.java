@@ -13,4 +13,7 @@ public interface BusService {
 
     //查询附近公交
     Object findBusWayNearby(String latitude, String longitude, String crity);
+
+    //查询路线
+    Object findBusWayNearbyBus(String openid, String stationid, String crity);
 }

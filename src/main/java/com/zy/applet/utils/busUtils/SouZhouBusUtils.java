@@ -4,9 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zy.applet.pojo.KeyValue;
 import com.zy.applet.utils.HttpUtils;
 import com.zy.applet.utils.Utils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SouZhouBusUtils {
@@ -42,12 +47,43 @@ public class SouZhouBusUtils {
         return result;
     }
 
-    public static void main(String[] args) {
-        Result result = souZhouBusUtils("31.306507", "120.670319");
-        for (Data data : result.getData()) {
-            System.out.println(data.getStationCName());
-            System.out.println(data.getLongStr());
+
+
+    public static Result souZhouBusUtils(String stationID,Integer status){
+        Result result = new Result();
+        List<Data> dataList = new ArrayList<>();
+        Data data  = new Data();
+        KeyValue[] keyValues = new KeyValue[]{
+                new KeyValue("stationID",stationID)
+        };
+
+        String html = HttpUtils.get("http://bus.2500.tv/stationList.php", keyValues);
+        Document doc = Jsoup.parse(html);
+        Elements elements = doc.getElementsByTag("dl");
+        for (Element element : elements) {
+            Elements b = element.getElementsByTag("b");
+            Elements p = element.getElementsByTag("p");
+            Elements a = element.getElementsByTag("a");
+            String lineID = a.first().attr("lineID");
+            String pText = p.last().text();
+            String bText = b.text();
+            data.setBusId(lineID);
+            data.setBusName(bText);
+            data.setStationCName(pText);
+            dataList.add(data);
         }
+        result.setData(dataList);
+        return result;
+    }
+
+
+
+
+
+
+
+    public static void main(String[] args) {
+        Result result = souZhouBusUtils("10000444",1);
     }
 
 
@@ -96,6 +132,9 @@ public class SouZhouBusUtils {
     }
 
     public static class Data{
+        private String busId;
+        private String busName;
+        private String beginEnd;
         private Integer number;
         @JsonProperty(value = "BusInfo")
         private String busInfo;
@@ -117,6 +156,30 @@ public class SouZhouBusUtils {
         private String longitude;
         @JsonProperty(value = "long")
         private Integer longStr;
+
+        public String getBusId() {
+            return busId;
+        }
+
+        public void setBusId(String busId) {
+            this.busId = busId;
+        }
+
+        public String getBeginEnd() {
+            return beginEnd;
+        }
+
+        public void setBeginEnd(String beginEnd) {
+            this.beginEnd = beginEnd;
+        }
+
+        public String getBusName() {
+            return busName;
+        }
+
+        public void setBusName(String busName) {
+            this.busName = busName;
+        }
 
         public Integer getNumber() {
             return number;
