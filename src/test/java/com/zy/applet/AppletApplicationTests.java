@@ -22,11 +22,7 @@ public class AppletApplicationTests {
 	private BusService busService;
 	@Test
 	public void contextLoads() {
-////		List<BusConfig> busConfigList = busService.selectBusConfigByLikeBusName("1");
-//		for (BusConfig busConfig : busConfigList) {
-//			System.out.println(busConfig.getBusName());
-//		}
-//		System.out.println(busConfigList.size());
+
 	}
 
 }
