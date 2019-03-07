@@ -2,13 +2,11 @@ package com.zy.applet.utils.tencent;
 
 import com.zy.applet.pojo.TencentBotReturn;
 import com.zy.applet.utils.HttpUtils;
-import com.zy.applet.utils.SortUtils;
 import com.zy.applet.utils.Utils;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.UUID;
+
 
 /**
  * @Author: zy
@@ -18,7 +16,7 @@ import java.util.UUID;
  */
 public class TencentBotUtils {
 
-    private static final String URL = "http://localhost:8888/tencent/bot";
+    private static final String URL = "http://47.96.120.133:8888/tencent/bot";
 
     public static TencentBotReturn tencentBot(String boot, String session, String question) {
         HashMap<String, String> hashMapParams = new HashMap<>();
