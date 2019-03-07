@@ -221,7 +221,4 @@
         document.getElementById('audios').play()
     })
 </script>
-<div style="text-align: center">
-    <a href="https://zhuyao.xin/index" style="text-align: center"><font style="font-size: 35px;color: #4cae4c;"><b>返回</b></font></a>
-</div>
 </body></html>
