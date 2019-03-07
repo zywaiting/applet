@@ -88,8 +88,4 @@ public class OssUploadFileUtils {
         return "http://"+bucketName+".oss-cn-hangzhou.aliyuncs.com/"+ yourObjectName;
     }
 
-    public static void main(String[] args) {
-        String url =OssUploadFile("wq-zy","UAmp4riXty.txt","D:\\图片\\UAmp4riXty.txt");
-        System.out.println(url);
-    }
 }
