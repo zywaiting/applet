@@ -24,7 +24,7 @@ public class HelloBot extends WeChatBot {
             log.info("接收到 [{}] 的消息: {}", message.getName(), message.getText());
             TencentBotReturn tencentBotReturn = TencentBotUtils.tencentBot(message.getText(),message.getFromUserName(), message.getText());
             if (!"关机".equals(tencentBotReturn.getMsg()) && tencentBotReturn.getRet() == 0) {
-                this.sendMsg(message.getFromUserName(), tencentBotReturn.getData().getAnswer());
+                this.sendMsg(message.getFromUserName(), tencentBotReturn.getData().getAnswer().replaceAll("豪豪","瑶瑶"));
             }
         }
     }
