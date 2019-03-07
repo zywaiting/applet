@@ -3,7 +3,7 @@ package com.zy.applet.utils.aliyun;
 import com.zy.applet.pojo.AppletConfig;
 import com.zy.applet.pojo.KeyValue;
 import com.zy.applet.utils.HttpUtils;
-import com.zy.applet.utils.Utils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

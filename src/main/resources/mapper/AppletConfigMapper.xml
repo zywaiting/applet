@@ -5,4 +5,8 @@
         UPDATE `applet_config` SET `access_token` = #{acessToken} WHERE `app_id` = #{appid}
     </update>
 
+    <select id="findByExpress" resultType="com.zy.applet.pojo.AppletConfig">
+        SELECT * FROM `applet_config` WHERE `express` = #{express}
+    </select>
+
 </mapper>

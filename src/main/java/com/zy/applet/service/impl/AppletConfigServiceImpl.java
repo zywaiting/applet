@@ -31,4 +31,9 @@ public class AppletConfigServiceImpl implements AppletConfigService {
         GetTokenUtils.Result result = GetTokenUtils.getToken(appletConfig);
         appletConfigMapper.updateAccessToken(result.getAccessToken(),appletConfig.getAppId());
     }
+
+    @Override
+    public AppletConfig findByExpress(String express) {
+        return appletConfigMapper.findByExpress(express);
+    }
 }
