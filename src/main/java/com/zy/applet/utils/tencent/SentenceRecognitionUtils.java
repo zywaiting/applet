@@ -9,6 +9,8 @@ import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
 public class SentenceRecognitionUtils {
 
+
+
     public static void main(String [] args) {
         try{
 
@@ -22,7 +24,9 @@ public class SentenceRecognitionUtils {
 
             AaiClient client = new AaiClient(cred, "ap-beijing", clientProfile);
 
-            String params = "{\"ProjectId\":0,\"SubServiceType\":2,\"EngSerViceType\":\"16k\",\"SourceType\":0,\"Url\":\"http%3a%2f%2fwq-zy.oss-cn-hangzhou.aliyuncs.com%2ftencentBot%2fmp3%2f8165e45011244659be0ebb34a887c78a.mp3\",\"VoiceFormat\":\"mp3\",\"UsrAudioKey\":\"123\"}";
+            String params = "{\"ProjectId\":0,\"SubServiceType\":2,\"EngSerViceType\":\"16k\",\"SourceType\":0,\"Url\":\"" +
+                    "http%3a%2f%2fwq-zy.oss-cn-hangzhou.aliyuncs.com%2ftencentBot%2fmp3%2f8165e45011244659be0ebb34a887c78a.mp3" +
+                    "\",\"VoiceFormat\":\"mp3\",\"UsrAudioKey\":\"123\"}";
             SentenceRecognitionRequest req = SentenceRecognitionRequest.fromJsonString(params, SentenceRecognitionRequest.class);
 
             SentenceRecognitionResponse resp = client.SentenceRecognition(req);

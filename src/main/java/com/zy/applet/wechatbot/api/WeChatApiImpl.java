@@ -22,12 +22,13 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import org.apache.jasper.tagplugins.jstl.core.Url;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.InputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -427,9 +428,11 @@ public class WeChatApiImpl implements WeChatApi {
                 .add("rr", ~(System.currentTimeMillis() / 1000)));
 
         WebSyncResponse webSyncResponse = response.parse(WebSyncResponse.class);
+        int count = 0;
         if (!webSyncResponse.success()) {
-            log.warn("获取消息失败");
-            return webSyncResponse;
+            return null;
+//            log.warn("获取消息失败");
+//            return webSyncResponse;
         }
         bot.session().setSyncKey(webSyncResponse.getSyncKey());
         return webSyncResponse;
@@ -973,7 +976,52 @@ public class WeChatApiImpl implements WeChatApi {
      */
     @Override
     public MediaResponse uploadMedia(String toUser, String filePath) {
-        File file = new File(filePath);
+
+
+        //创建URL对象，参数传递一个String类型的URL解析地址
+        URL urL = null;
+        try {
+            urL = new URL(filePath);
+            //HttpURLConnection是protected修饰的，无法直接new对象
+            //url的openConnection方法返回值是URLConnection类的对象，需要强转为HttpURLConnection
+            //所以直接通过url调用openConnection方法来实现创建HttpURLConnection的对象
+            HttpURLConnection huc =(HttpURLConnection) urL.openConnection();
+            //设置请求方式
+            huc.setRequestMethod("GET");
+            int code=0;
+            // 从 HTTP 响应消息获取状态码
+            //200表示ok，500表示服务器错误，404表示找不到
+            code =huc.getResponseCode();
+            //如果状态码为200，表示连接ok，可以继续操作
+            if(code==200) {
+                //获取输入流
+                InputStream ips = huc.getInputStream();
+
+                //采用高效输入流获取网络上的资源
+                BufferedInputStream bis=new BufferedInputStream(ips);
+                BufferedOutputStream bos= new BufferedOutputStream(new FileOutputStream("test.jpg"));
+                byte[] b=new byte[1024];
+                int len=0;
+                //将数据写入文件
+                while((len=bis.read(b))!=-1)
+                {
+                    bos.write(b,0,len);
+                    //刷新资源------在前面IO部分提到过，write方法使用完需要刷新
+                    // bos.flush();
+                }
+                //关闭流，释放资源
+                bos.close();
+                bis.close();
+                ips.close();
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+
+
+        File file = new File("test.jpg");
+
+       // File file = new File(filePath);
         if (!file.exists()) {
             throw new WeChatException("文件[" + filePath + "]不存在");
         }
@@ -990,7 +1038,7 @@ public class WeChatApiImpl implements WeChatApi {
         if (mediatype.contains("video")) {
             mediatype = "video";
         }
-        String url     = String.format("%s/webwxuploadmedia?f=json", bot.session().getFileUrl());
+        String url = String.format("%s/webwxuploadmedia?f=json", bot.session().getFileUrl());
         String mediaId = System.currentTimeMillis() / 1000 + StringUtils.random(6);
 
         Map<String, Object> uploadMediaRequest = new HashMap<>(10);
