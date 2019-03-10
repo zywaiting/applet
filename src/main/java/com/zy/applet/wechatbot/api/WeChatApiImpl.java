@@ -22,11 +22,9 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import org.apache.jasper.tagplugins.jstl.core.Url;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -816,8 +814,13 @@ public class WeChatApiImpl implements WeChatApi {
         switch (message.msgType()) {
             case TEXT:
                 // 被艾特的消息
-                if (content.startsWith("@" + bot.session().getNickName())) {
-                    content = content.substring(content.indexOf(" "));
+//                if (content.startsWith("@" + bot.session().getNickName())) {
+//                    content = content.substring(content.indexOf(" "));
+//                    weChatMessageBuilder.isAtMe(true);
+//                }
+                if (content.contains("@" + bot.session().getNickName())) {
+                    content = content.replaceAll("@" + bot.session().getNickName()+" ", "");
+                    weChatMessageBuilder.isAtMe(true);
                 }
                 // 位置消息
                 if (content.contains(LOCATION_IDENTIFY)) {
