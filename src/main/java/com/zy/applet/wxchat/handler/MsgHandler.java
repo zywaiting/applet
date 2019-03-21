@@ -1,6 +1,8 @@
 package com.zy.applet.wxchat.handler;
 
+import com.zy.applet.entitydto.TencentBotDto;
 import com.zy.applet.service.RealTimeBusService;
+import com.zy.applet.utils.tencent.TencentBotUtils;
 import com.zy.applet.wxchat.builder.TextBuilder;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -29,6 +31,11 @@ public class MsgHandler extends AbstractHandler {
 
         if (!wxMessage.getMsgType().equals(XmlMsgType.EVENT)) {
             //TODO 可以选择将消息保存到本地
+        }
+
+        if (wxMessage.getMsgType().equals(XmlMsgType.TEXT)) {
+            TencentBotDto tencentBotDto = TencentBotUtils.tencentBot(wxMessage.getFromUser(), wxMessage.getContent());
+            return new TextBuilder().build(tencentBotDto.getData().getAnswer().replaceAll("豪豪", "瑶瑶"), wxMessage, weixinService);
         }
 
         //当用户输入关键词如“你好”，“客服”等，并且有客服在线时，把消息转发给在线客服

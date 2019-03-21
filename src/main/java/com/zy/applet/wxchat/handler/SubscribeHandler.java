@@ -52,7 +52,7 @@ public class SubscribeHandler extends AbstractHandler {
         }
 
         try {
-            return new TextBuilder().build("感谢关注", wxMessage, weixinService);
+            return new TextBuilder().build("感谢你关注\"java经验总结\"，\t\n瑶瑶机器人为你服务,您可以回复\"笑话\",\t\n或者回复\"java\"", wxMessage, weixinService);
         } catch (Exception e) {
             this.logger.error(e.getMessage(), e);
         }

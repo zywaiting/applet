@@ -1,6 +1,6 @@
 package com.zy.applet;
 
-import com.zy.applet.pojo.TencentBotReturn;
+import com.zy.applet.entitydto.TencentBotDto;
 import com.zy.applet.pojo.TencentPictureReturn;
 import com.zy.applet.utils.Base64TestUtils;
 import com.zy.applet.utils.kedaxunfeiutils.KeDaXuFeiUtils;
@@ -30,17 +30,17 @@ public class HelloBot extends WeChatBot {
             log.info("接收到 [{}] 的消息: {}", message.getName(), message.getText());
             if ("开机".equals(message.getText())) {
                 this.sendMsg(message.getFromUserName(), "瑶瑶以准备好，要和你大战300个回合![色][色][色]");
-                TencentBotReturn tencentBotReturn = TencentBotUtils.tencentBot(message.getText(), message.getFromUserName(), message.getText());
+                TencentBotDto tencentBotDto = TencentBotUtils.tencentBot( message.getFromUserName(), message.getText());
                 return;
             } else if ("关机".equals(message.getText())) {
-                TencentBotReturn tencentBotReturn = TencentBotUtils.tencentBot(message.getText(), message.getFromUserName(), message.getText());
+                TencentBotDto tencentBotDto = TencentBotUtils.tencentBot(message.getFromUserName(), message.getText());
                 this.sendMsg(message.getFromUserName(), "瑶瑶要走了,别想我![可怜][可怜][可怜]");
                 return;
             } else {
-                TencentBotReturn tencentBotReturn = TencentBotUtils.tencentBot(message.getText(), message.getFromUserName(), message.getText());
-                if (!"关机".equals(tencentBotReturn.getMsg())) {
-                    if (tencentBotReturn.getRet() == 0) {
-                        this.sendMsg(message.getFromUserName(), tencentBotReturn.getData().getAnswer().replaceAll("豪豪", "瑶瑶"));
+                TencentBotDto tencentBotDto = TencentBotUtils.tencentBot(message.getFromUserName(), message.getText());
+                if (!"关机".equals(tencentBotDto.getMsg())) {
+                    if (tencentBotDto.getRet() == 0) {
+                        this.sendMsg(message.getFromUserName(), tencentBotDto.getData().getAnswer().replaceAll("豪豪", "瑶瑶"));
                     } else {
                         this.sendMsg(message.getFromUserName(), "信息量太大，容瑶瑶想想。。。[晕][晕][晕]");
                     }
@@ -57,9 +57,9 @@ public class HelloBot extends WeChatBot {
         if (StringUtils.isNotEmpty(message.getName())) {
             log.info("接收到 [{}] 的消息: {}", message.getName(), message.getText());
             if (message.isAtMe()) {
-                TencentBotReturn tencentBotReturn = TencentBotUtils.tencentBot(message.getText(), message.getFromUserName(), message.getText());
-                if (tencentBotReturn.getRet() == 0) {
-                    this.sendMsg(message.getFromUserName(), tencentBotReturn.getData().getAnswer().replaceAll("豪豪", "瑶瑶"));
+                TencentBotDto tencentBotDto = TencentBotUtils.tencentBot(message.getFromUserName(), message.getText());
+                if (tencentBotDto.getRet() == 0) {
+                    this.sendMsg(message.getFromUserName(), tencentBotDto.getData().getAnswer().replaceAll("豪豪", "瑶瑶"));
                 } else {
                     this.sendMsg(message.getFromUserName(), "信息量太大，容瑶瑶想想。。。[晕][晕][晕]");
                 }
@@ -74,10 +74,10 @@ public class HelloBot extends WeChatBot {
             log.info("接收到 [{}] 的消息: {}", message.getName(), message.getText());
             KeDaXuFeiUtils.Result result = KeDaXuFeiUtils.speechRecognizer(message.getVoicePath());
             if (result != null && "success".equals(result.getDesc())) {
-                TencentBotReturn tencentBotReturn = TencentBotUtils.tencentBot(result.getCode(), message.getFromUserName(), result.getData());
-                if (!"关机".equals(tencentBotReturn.getMsg())) {
-                    if (tencentBotReturn.getRet() == 0) {
-                        this.sendMsg(message.getFromUserName(), tencentBotReturn.getData().getAnswer().replaceAll("豪豪", "瑶瑶"));
+                TencentBotDto tencentBotDto = TencentBotUtils.tencentBot(message.getFromUserName(), result.getData());
+                if (!"关机".equals(tencentBotDto.getMsg())) {
+                    if (tencentBotDto.getRet() == 0) {
+                        this.sendMsg(message.getFromUserName(), tencentBotDto.getData().getAnswer().replaceAll("豪豪", "瑶瑶"));
                     } else {
                         this.sendMsg(message.getFromUserName(), "信息量太大，容瑶瑶想想。。。[晕][晕][晕]");
                     }
