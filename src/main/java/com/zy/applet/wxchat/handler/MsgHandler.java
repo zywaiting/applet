@@ -1,23 +1,14 @@
 package com.zy.applet.wxchat.handler;
 
-import com.zy.applet.pojo.BusConfig;
 import com.zy.applet.service.RealTimeBusService;
-import com.zy.applet.utils.OlamiUtils;
-import com.zy.applet.utils.ResponseMessageUtils;
-import com.zy.applet.utils.busUtils.SouZhouBusUtils;
 import com.zy.applet.wxchat.builder.TextBuilder;
-import com.zy.applet.wxchat.utils.JsonUtils;
-import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
@@ -53,31 +44,32 @@ public class MsgHandler extends AbstractHandler {
 //            e.printStackTrace();
 //        }
 
-        String content = "";
+        String content = "你好！";
 
         //TODO 组装回复消息
-        if (StringUtils.endsWith(wxMessage.getContent(), "公交")) {
-            logger.info("调用了realTimeBus接口---------------api/realTimeBus");
-            logger.info("wxMessage.getContent()--------------->{}",wxMessage.getContent());
-            List<BusConfig> busConfig = realTimeBusService.selectBusConfigByCrityAndBusName("苏州", wxMessage.getContent().replaceAll("公交",""));
-            if ("苏州".equals("苏州")) {
-                logger.info("busConfig.getBusId()--------------->{}",busConfig.get(0).getBusId());
-                SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(busConfig.get(0).getBusId());
-                List<SouZhouBusUtils.Data> data = result.getData();
-                SouZhouBusUtils.Result resultNew = new SouZhouBusUtils.Result();
-                List<SouZhouBusUtils.Data> dataNew = new ArrayList<>();
-                for (SouZhouBusUtils.Data datum : data) {
-                    if (StringUtils.isNotBlank(datum.getBusInfo())) {
-                        dataNew.add(datum);
-                    }
-                }
-                resultNew.setData(dataNew);
-                content = JsonUtils.toJson(resultNew);
-            }
-        }else {
-            OlamiUtils.Result result = OlamiUtils.textRecognizer(wxMessage.getContent());
-            content = result.getData().getNliList().get(0).getDescObj().getResult();
-        }
+        logger.info("---------------------------------------{}", wxMessage.getContent());
+//        if (StringUtils.endsWith(wxMessage.getContent(), "公交")) {
+//            logger.info("调用了realTimeBus接口---------------api/realTimeBus");
+//            logger.info("wxMessage.getContent()--------------->{}",wxMessage.getContent());
+//            List<BusConfig> busConfig = realTimeBusService.selectBusConfigByCrityAndBusName("苏州", wxMessage.getContent().replaceAll("公交",""));
+//            if ("苏州".equals("苏州")) {
+//                logger.info("busConfig.getBusId()--------------->{}",busConfig.get(0).getBusId());
+//                SouZhouBusUtils.Result result = SouZhouBusUtils.souZhouBusUtils(busConfig.get(0).getBusId());
+//                List<SouZhouBusUtils.Data> data = result.getData();
+//                SouZhouBusUtils.Result resultNew = new SouZhouBusUtils.Result();
+//                List<SouZhouBusUtils.Data> dataNew = new ArrayList<>();
+//                for (SouZhouBusUtils.Data datum : data) {
+//                    if (StringUtils.isNotBlank(datum.getBusInfo())) {
+//                        dataNew.add(datum);
+//                    }
+//                }
+//                resultNew.setData(dataNew);
+//                content = JsonUtils.toJson(resultNew);
+//            }
+//        }else {
+//            OlamiUtils.Result result = OlamiUtils.textRecognizer(wxMessage.getContent());
+//            content = result.getData().getNliList().get(0).getDescObj().getResult();
+//        }
 
 
         return new TextBuilder().build(content, wxMessage, weixinService);

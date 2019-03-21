@@ -98,4 +98,8 @@ public class HelloBot extends WeChatBot {
             }
         }
     }
+
+    public static void main(String[] args) {
+        new HelloBot(Config.me().autoLogin(false).showTerminal(true)).start();
+    }
 }
